@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE RESILIENCE | India vs Terror</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Oswald:wght@300;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --blood: #8b0000;
+            --cyber-black: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--cyber-black);
+            color: var(--white);
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Background Animated Particles Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+            z-index: -1;
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 4px; }
+        .glitch { position: relative; color: var(--white); font-size: 5rem; font-weight: 900; }
+
+        /* Fancy Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--saffron), var(--green)); border-radius: 10px; }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--cyber-black)),
+                        url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2071&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero h1 { text-shadow: 0 0 20px var(--saffron); }
+        .hero p { font-family: 'Oswald'; font-size: 1.5rem; opacity: 0.8; margin-top: 20px; }
+
+        /* The Content Cards */
+        .beast-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 40px;
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .beast-card:hover {
+            border-color: var(--saffron);
+            box-shadow: 0 0 50px rgba(255, 153, 51, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .beast-card h2 { color: var(--saffron); margin-bottom: 20px; }
+
+        /* Specific Highlight: 26/11 */
+        .mumbai-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .mumbai-stat {
+            border-left: 4px solid var(--blood);
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mumbai-stat h4 { color: var(--blood); font-size: 1.5rem; }
+
+        /* The Villain Profile: Rehman Dakait */
+        .villain-section {
+            background: linear-gradient(90deg, #000 0%, #1a0000 100%);
+            border-left: 10px solid var(--blood);
+        }
+
+        .dakait-img {
+            float: right;
+            width: 300px;
+            height: 400px;
+            background: #222;
+            margin-left: 30px;
+            border: 2px solid var(--blood);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron';
+            color: var(--blood);
+            text-align: center;
+        }
+
+        /* Timeline Styles */
+        .war-timeline {
+            border-left: 2px dashed var(--green);
+            padding-left: 40px;
+            margin-left: 20px;
+        }
+
+        .war-event {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .war-event::before {
+            content: "◆";
+            position: absolute;
+            left: -53px;
+            color: var(--green);
+            font-size: 2rem;
+            background: var(--cyber-black);
+        }
+
+        /* Buttons */
+        .btn-fancy {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid var(--saffron);
+            color: var(--saffron);
+            text-decoration: none;
+            font-family: 'Orbitron';
+            font-weight: bold;
+            margin-top: 30px;
+            transition: 0.3s;
+        }
+
+        .btn-fancy:hover {
+            background: var(--saffron);
+            color: #000;
+            box-shadow: 0 0 30px var(--saffron);
+        }
+
+        footer {
+            padding: 50px;
+            text-align: center;
+            background: #000;
+            border-top: 1px solid var(--green);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { animation: fadeIn 1s ease-out forwards; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1 class="glitch">SHOURYA</h1>
+        <p>CHRONICLES OF DEFENSE | INDIA vs. STATE-SPONSORED TERROR</p>
+        <div style="margin-top: 50px;">
+            <a href="#history" class="btn-fancy">ENTER THE ARCHIVE</a>
+        </div>
+    </section>
+
+    <section id="history">
+        <h2>The Modern Battlefield (Post-1995)</h2>
+        <div class="beast-card">
+            <div class="war-timeline">
+                <div class="war-event">
+                    <h3>1999: The Heights of Kargil</h3>
+                    <p>In the frigid altitudes of the Himalayas, Pakistan's Northern Light Infantry infiltrated Indian territory under the guise of mujahideen. India's response, **Operation Vijay**, saw the legendary sacrifice of Captain Vikram Batra and Manoj Kumar Pandey. The recapture of Tiger Hill signaled to the world that India’s borders were inviolable.</p>
+                </div>
+                <div class="war-event">
+                    <h3>2001: Attack on Parliament</h3>
+                    <p>A direct strike on the heart of Indian democracy. This event led to **Operation Parakram**, a massive military mobilization that brought the sub-continent to the brink of a full-scale war, changing Indian defense posture forever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="2611" style="background-color: #0d0d0d;">
+        <h2 style="color: var(--blood);">26/11: THE NIGHT MUMBAI STOOD STILL</h2>
+        <div class="beast-card">
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">On November 26, 2008, 10 terrorists launched a maritime invasion of Mumbai. This wasn't just a terror attack; it was a tactical siege designed to paralyze a global city.</p>
+            
+            <div class="mumbai-grid">
+                <div class="mumbai-stat">
+                    <h4>THE CST MASSACRE</h4>
+                    <p>Ajmal Kasab and Ismail Khan opened fire on commuters, killing 58 people in minutes. The bravery of Constable Tukaram Omble led to Kasab's capture.</p>
+                </div>
+                <div class="mumbai-stat">
+                    <h4>THE TAJ & OBEROI</h4>
+                    <p>A 60-hour standoff. The NSG (Black Cats) executed **Operation Black Tornado**, neutralizing the terrorists room-by-room in a burning architectural icon.</p>
+                </div>
+                <div class="mumbai-stat">
+                    <h4>THE LASHKAR LINK</h4>
+                    <p>Intercepted VOIP calls proved the handlers were sitting in control rooms in Pakistan, directing the killers in real-time. A global shift in how the world viewed state-sponsored terror.</p>
+                </div>
+                <div class="mumbai-stat">
+                    <h4>THE HEROES</h4>
+                    <p>Major Sandeep Unnikrishnan, Hemant Karkare, Vijay Salaskar, and Ashok Kamte. Names etched in gold.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dakait" class="villain-section">
+        <h2>THE ARCHITECT OF CHAOS: REHMAN DAKAIT</h2>
+        <div class="beast-card">
+            <div class="dakait-img">
+                IMAGE CLASSIFIED<br>[REHMAN DAKAIT]
+            </div>
+            <p><strong>Alias:</strong> Sardar Abdul Rehman Baloch</p>
+            <p><strong>Territory:</strong> Lyari, Karachi</p>
+            <p><strong>Impact:</strong> Rehman Dakait was more than a gangster; he was a bridge between the criminal underworld and geopolitical sabotage. He turned Lyari into a "No-Go Zone" where criminal syndicates could operate with immunity.</p>
+            <p style="margin-top: 20px;">While the Indian frontline dealt with soldiers and infiltrators, the "Deep State" utilized figures like Dakait and his successor **Uzair Baloch** to manage the logistics of chaos. Dakait’s death in a 2009 encounter with **SP Chaudhry Aslam** (the 'Encounter Specialist') was a major blow to the Lyari-based terror pipeline.</p>
+            <p style="margin-top: 20px; border-top: 1px solid #333; padding-top: 10px;"><em>"The King of Lyari fell, but the shadows he cast across the border lingered for a decade."</em></p>
+        </div>
+    </section>
+
+    <section id="future">
+        <h2 style="color: var(--green);">2025-2026: THE NEW DOCTRINE</h2>
+        <div class="beast-card">
+            <h3>OPERATION SINDOOR (2025)</h3>
+            <p>Following the Pahalgam incidents, India deployed the "Sudershan" AI-integrated drone swarm for the first time. The neutralization of high-value targets across the Line of Control (LoC) without a single civilian casualty set a new global standard for counter-terrorism.</p>
+            <div class="mumbai-stat" style="margin-top: 30px; border-color: var(--green);">
+                <h4>COMING MARCH 19, 2026</h4>
+                <p>The release of <strong>DHURANDHAR 2: THE REVENGE</strong>. A cinematic exploration of the hunt for the masterminds behind the modern insurgency.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>JAI HIND</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #444;">This site is a tribute to the Indian Armed Forces and Intelligence Services. Built for the future.</p>
+    </footer>
+
+</body>
+</html>
