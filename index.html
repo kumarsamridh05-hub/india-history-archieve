@@ -3,239 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT BHARAT | FULL DEFENSE ARCHIVE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>THE BHARAT ARCHIVE | INDEPENDENCE TO 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-orange: #ff8c00;
-            --neon-green: #39ff14;
-            --blood-red: #ff0000;
-            --terminal-bg: #0a0b0d;
+            --saffron: #FF9933;
+            --white: #F4F4F4;
+            --green: #138808;
+            --gold: #D4AF37;
+            --deep-navy: #0A0F1E;
+            --blood: #8B0000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--terminal-bg);
-            color: #d1d1d1;
-            font-family: 'Rajdhani', sans-serif;
-            padding-bottom: 100px;
-            /* FANCY TACTICAL BACKGROUND */
+            background-color: var(--deep-navy);
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            /* INDIAN THEMED BACKGROUND */
             background-image: 
-                radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
-                linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px, 20px 20px, 20px 20px;
+                linear-gradient(rgba(10, 15, 30, 0.95), rgba(10, 15, 30, 0.95)),
+                url('https://www.transparenttextures.com/patterns/paper.png'),
+                url('https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg');
+            background-repeat: no-repeat, repeat, no-repeat;
+            background-position: center center;
+            background-size: cover, auto, 60%;
+            background-attachment: fixed;
         }
-
-        /* Moving Scanline */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: rgba(0, 255, 0, 0.1);
-            box-shadow: 0 0 10px var(--neon-green);
-            animation: scan 6s linear infinite;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
 
         header {
-            padding: 80px 20px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 2px solid var(--neon-orange);
-            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 4px solid var(--gold);
+            position: relative;
+            overflow: hidden;
         }
 
-        .main-title {
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 20px;
-            color: var(--neon-orange);
-            text-shadow: 0 0 20px var(--neon-orange);
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; width: 100%; height: 10px;
+            background: linear-gradient(90deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
         }
 
-        .grid-layout {
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 6rem;
+            color: var(--gold);
+            letter-spacing: 15px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            letter-spacing: 3px;
+        }
+
+        /* MASSIVE SQUARE GRID */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 40px;
-            padding: 60px;
-            max-width: 1600px;
+            padding: 80px 40px;
+            max-width: 1700px;
             margin: 0 auto;
         }
 
-        /* THE BIG SQUARE BOXES */
-        .tactical-box {
-            background: rgba(15, 17, 20, 0.95);
-            border: 1px solid #333;
-            min-height: 450px;
-            padding: 40px;
-            transition: 0.4s;
+        .square-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 50px;
             position: relative;
+            transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(5px);
             cursor: pointer;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            min-height: 500px;
         }
 
-        .tactical-box:hover {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+        .square-box:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: var(--gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .box-header {
-            font-family: 'Share Tech Mono', monospace;
+        .box-title {
+            font-family: 'Cinzel', serif;
             font-size: 2.5rem;
-            color: var(--neon-orange);
-            margin-bottom: 20px;
-            border-bottom: 1px solid #444;
+            color: var(--saffron);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
             display: block;
         }
 
-        /* HIDDEN LONG INFORMATION */
-        .long-intel {
+        .year-indicator {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Share Tech Mono';
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 15px;
+            font-size: 1rem;
+        }
+
+        /* THE LONG INFO */
+        .content {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #ddd;
+            text-align: justify;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.8s ease-out;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #aaa;
+            transition: max-height 1s ease-in-out;
         }
 
-        .tactical-box.active {
-            border-color: var(--neon-orange);
-            min-height: 600px; /* Expands to fit content */
+        .square-box.active .content {
+            max-height: 3000px; /* Unending length */
+            margin-top: 30px;
         }
 
-        .tactical-box.active .long-intel {
-            max-height: 2000px; /* Allow it to be very long */
+        .active-label {
+            display: none;
+            color: var(--gold);
             margin-top: 20px;
-        }
-
-        .box-status {
-            position: absolute;
-            top: 15px; right: 15px;
+            font-family: 'Share Tech Mono';
             font-size: 0.8rem;
-            padding: 2px 8px;
-            background: #222;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
         }
 
-        .active .box-status {
-            background: var(--neon-orange);
-            color: black;
+        .square-box.active .active-label { display: block; }
+
+        /* DECORATION */
+        .stat-line {
+            height: 2px;
+            width: 50px;
+            background: var(--gold);
+            margin: 20px 0;
         }
 
-        /* Typography for details */
-        h4 { color: white; margin: 15px 0 5px 0; border-left: 3px solid var(--neon-green); padding-left: 10px; }
-        .hero-name { color: var(--neon-green); font-weight: bold; }
+        footer {
+            padding: 100px;
+            text-align: center;
+            border-top: 1px solid var(--gold);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .martyr-highlight {
+            color: var(--saffron);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
     </style>
 </head>
 <body>
 
     <header>
-        <div class="main-title">AKHAND</div>
-        <p style="letter-spacing: 5px; margin-top: 10px;">DEFENSE & UNDERWORLD ARCHIVE: 1947 - 2026</p>
+        <div class="title">PRALAY</div>
+        <div class="subtitle">Official Intelligence Archive of the Indian Republic</div>
+        <p style="margin-top: 40px; font-family: 'Share Tech Mono'; color: var(--gold);">SECURED CONNECTION // 2026.02.07</p>
     </header>
 
-    <div class="grid-layout">
+    <div class="grid">
 
-        <div class="tactical-box" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_001</div>
-            <span class="box-header">1947: THE FIRST CLASH</span>
-            <p>The dawn of independence was met with fire in the valley...</p>
-            <div class="long-intel">
-                <h4>THE INVASION</h4>
-                In October 1947, Pakistan launched "Operation Gulmarg," sending thousands of tribal Lashkars (backed by the Pak Army) into Kashmir. Their goal: Capture Srinagar before winter set in. 
-                <h4>THE ACCESSION</h4>
-                Maharaja Hari Singh, facing the fall of his kingdom, signed the Instrument of Accession on Oct 26. The very next morning, Indian troops of the 1st Sikh Regiment were airlifted into Srinagar in a historic mission.
-                <h4>LEGEND OF MAJ. SOMNATH SHARMA</h4>
-                At Badgam, Maj. Sharma held off 700 invaders with just a handful of men. Even with a broken arm, he directed mortar fire until he was killed by a shell. He became India's first Param Vir Chakra recipient.
-                <h4>OUTCOME</h4>
-                The war lasted 14 months, ending in a UN-mandated ceasefire on Jan 1, 1949, creating the Line of Control (LoC).
+        <div class="square-box" onclick="this.classList.toggle('active')">
+            <div class="year-indicator">FILE: 1947</div>
+            <span class="box-title">First War of Kashmir</span>
+            <p>The baptism by fire for a newly independent nation...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE PRELUDE</h4>
+                Following Partition, Pakistan launched 'Operation Gulmarg.' Over 20,000 tribesmen (Afridis) supported by regular Pakistani troops surged into Muzaffarabad and Domel. 
+                <h4>THE DEFENSE</h4>
+                Maharaja Hari Singh signed the Accession on October 26, 1947. On October 27, at 05:00 hrs, the 1st Sikh Regiment landed in Srinagar under the command of Lt. Col. Dewan Ranjit Rai. 
+                <h4>THE LEGENDS</h4>
+                <strong>Major Somnath Sharma (PVC):</strong> While his hand was in a cast, he held the Badgam airfield. His last message: "The enemy is only 50 yards from us. I shall not withdraw an inch but will fight to the last man and the last round." 
+                <strong>Brigadier Rajinder Singh:</strong> Known as the 'Savior of Kashmir,' he held the Uri bridge with just 200 men for four days, sacrificing himself to allow Indian airlifts to reach Srinagar.
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
-        <div class="tactical-box" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_002</div>
-            <span class="box-header">1965: TANK CARNAGE</span>
-            <p>Operation Gibraltar and the massive tank battles of Punjab...</p>
-            <div class="long-intel">
-                <h4>OPERATION GIBRALTAR</h4>
-                Pakistan sent 30,000 disguised soldiers into J&K to incite a rebellion. It failed. India retaliated by crossing the International Border and threatening Lahore.
-                <h4>BATTLE OF ASAL UTTAR</h4>
-                The "Graveyard of Pattons." Indian forces, led by CQMH Abdul Hamid, destroyed scores of superior American-made Patton tanks using simple recoilless guns. 
-                <h4>THE CEASEFIRE</h4>
-                The war saw the largest tank engagement since WWII. It ended with the Tashkent Declaration, where PM Lal Bahadur Shastri tragically passed away shortly after signing the peace treaty.
+        <div class="square-box" onclick="this.classList.toggle('active')">
+            <div class="year-indicator">FILE: 1965</div>
+            <span class="box-title">The Tank Massacre</span>
+            <p>The largest armor engagement since the Second World War...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE CONFLICT</h4>
+                In August 1965, Pakistan launched 'Operation Gibraltar' to destabilize the Kashmir valley. India retaliated by capturing the Haji Pir Pass and launching a massive counter-offensive toward Lahore.
+                <h4>ASAL UTTAR (THE FITTING REPLY)</h4>
+                In the sugar-cane fields of Punjab, India's 4th Mountain Division lured the Pakistani 1st Armored Division into a trap. Nearly 100 Patton tanks were destroyed or abandoned.
+                <h4>CQMH ABDUL HAMID</h4>
+                Operating a Jeep-mounted recoilless gun, Hamid single-handedly knocked out three Patton tanks before his final stand. He was posthumously awarded the Param Vir Chakra.
+                <h4>TASHKENT</h4>
+                The war ended under Soviet mediation. PM Lal Bahadur Shastri died in Tashkent hours after signing the peace agreement, leaving a legacy of 'Jai Jawan, Jai Kisan.'
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
-        <div class="tactical-box" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_003</div>
-            <span class="box-header">1971: 93,000 SURRENDER</span>
-            <p>The liberation of Bangladesh and the greatest military victory...</p>
-            <div class="long-intel">
-                <h4>THE GENOCIDE</h4>
-                After the Pak Army began "Operation Searchlight" against Bengalis, 10 million refugees fled to India. PM Indira Gandhi ordered Field Marshal Sam Manekshaw to prepare for war.
-                <h4>THE SURRENDER</h4>
-                In just 13 days, Indian forces and the Mukti Bahini crushed the Pakistani Eastern Command. On Dec 16, 1971, Gen Niazi signed the surrender document in Dhaka.
-                <h4>THE NAVAL BLITZ</h4>
-                "Operation Trident" saw Indian missile boats set Karachi harbor on fire, crippling the Pakistani Navy.
+        <div class="square-box" onclick="this.classList.toggle('active')">
+            <div class="year-indicator">FILE: 1971</div>
+            <span class="box-title">War of Liberation</span>
+            <p>The creation of a new nation and the map of Asia rewritten...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE CRISIS</h4>
+                The Pakistani military regime’s crackdown on East Bengal (Operation Searchlight) led to millions of refugees entering India. PM Indira Gandhi authorized General Sam Manekshaw to prepare for a multi-front war.
+                <h4>THE BLITZKRIEG</h4>
+                In 13 days, Indian forces captured Dhaka. It remains one of the fastest military victories in history.
+                <h4>BATTLE OF LONGEWALA</h4>
+                120 Indian soldiers of the 23 Punjab held off a massive Pakistani tank column of 2,000 men and 45 tanks. Major Kuldip Singh Chandpuri’s defiance remains a pinnacle of Indian military lore.
+                <h4>THE INSTRUMENT OF SURRENDER</h4>
+                93,000 Pakistani soldiers surrendered in Dhaka. This remains the largest surrender of prisoners of war since WWII.
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
-        <div class="tactical-box" style="border-left: 5px solid var(--blood-red);" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_RED</div>
-            <span class="box-header" style="color: var(--blood-red);">26/11: THE SIEGE</span>
-            <p>The 60-hour war against the soul of India's commercial capital...</p>
-            <div class="long-intel">
-                <h4>THE INFILTRATION</h4>
-                10 terrorists from Lashkar-e-Taiba arrived by sea. They split into pairs, targeting the CST Station, Leopold Cafe, Taj Palace, and Oberoi.
-                <h4>MARTYRS OF THE FORCE</h4>
-                <span class="hero-name">Tukaram Omble:</span> Captured Ajmal Kasab alive while taking a hail of bullets to the chest. Without him, the Pakistani link could never have been proven.
-                <br><span class="hero-name">Maj. Sandeep Unnikrishnan:</span> "Don't come up, I will handle them." His final words as he saved his team at the Taj.
-                <br><span class="hero-name">Hemant Karkare & Vijay Salaskar:</span> The top brass who took the fight directly to the terrorists at Cama Hospital.
-                <h4>INTERCEPTION DATA</h4>
-                Intelligence revealed handlers in Karachi directing the gunmen via VOIP, telling them to "kill everyone" to maximize terror.
+        <div class="square-box" style="border-left: 10px solid var(--blood);" onclick="this.classList.toggle('active')">
+            <div class="year-indicator" style="color: var(--blood); border-color: var(--blood);">FILE: 2008</div>
+            <span class="box-title" style="color: var(--blood);">Siege of Mumbai</span>
+            <p>60 hours of terror, resilience, and supreme sacrifice...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE ATTACK</h4>
+                10 terrorists trained by LeT entered Mumbai via the Arabian Sea. They attacked the Taj Mahal Palace Hotel, the Oberoi Trident, Leopold Cafe, CST Station, and Nariman House.
+                <h4>THE SUPREME SACRIFICE</h4>
+                <span class="martyr-highlight">Tukaram Omble:</span> At Girgaum Chowpatty, he grabbed the barrel of Kasab’s AK-47, taking over 40 bullets to ensure Kasab was captured alive.
+                <span class="martyr-highlight">Major Sandeep Unnikrishnan:</span> An NSG commando who, while flushing out terrorists in the Taj, sacrificed his life to save his fellow soldiers.
+                <span class="martyr-highlight">Hemant Karkare:</span> Chief of Mumbai ATS, along with Ashok Kamte and Vijay Salaskar, martyred while leading the first response.
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
-        <div class="tactical-box" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_DARK</div>
-            <span class="box-header">THE LYARI DON</span>
-            <p>The underworld-terror-state nexus of Rehman Dakait...</p>
-            <div class="long-intel">
-                <h4>WHO WAS REHMAN DAKAIT?</h4>
-                Abdul Rehman Baloch, the King of Lyari. He was more than a gangster; he was a political operative who ran a parallel government in Karachi. 
-                <h4>CRIMINAL LOGISTICS</h4>
-                His network was used for smuggling the very explosives and weapons used in cross-border terror. He was the bridge between the D-Company and state-sponsored terror groups.
-                <h4>THE END</h4>
-                He was eliminated in 2009 in a high-stakes encounter by SP Chaudhry Aslam. This dark legacy is the core of the film <span class="hero-name">DHURANDHAR (2025)</span>, showcasing how underworld "assets" are used against India.
+        <div class="square-box" onclick="this.classList.toggle('active')">
+            <div class="year-indicator">FILE: 2009</div>
+            <span class="box-title">Underworld Nexus</span>
+            <p>The Karachi connection and the shadow of Rehman Dakait...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE DON OF LYARI</h4>
+                Rehman Dakait (Sardar Abdul Rehman Baloch) was the "uncrowned king" of Lyari. He ran a parallel government, funding political movements while providing logistics for cross-border terror.
+                <h4>THE TERROR LINK</h4>
+                Intelligence dossiers prove that the Lyari gang wars were used as a distraction to move narcotics and arms that eventually funded terror operations in India. 
+                <h4>THE CINEMATIC RELEVANCE</h4>
+                The 2025 film <span class="martyr-highlight">Dhurandhar</span> (starring Akshaye Khanna) explores the hunt for Rehman and the impact of the Karachi underworld on Indian national security. It highlights the "Thousand Cuts" strategy where criminals are weaponized against the Indian state.
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
-        <div class="tactical-box" style="border-color: var(--neon-green);" onclick="this.classList.toggle('active')">
-            <div class="box-status">FILE_FUTURE</div>
-            <span class="box-header" style="color: var(--neon-green);">2026: NEW BORDERS</span>
-            <p>The future of Indian defense and the "Dhurandhar" doctrine...</p>
-            <div class="long-intel">
-                <h4>HYBRID WARFARE</h4>
-                By 2026, the LoC is monitored by AI-integrated sensor grids. Any infiltration is met with immediate, autonomous loitering munition strikes.
-                <h4>THE CINEMATIC WAR</h4>
-                Movies like 'Dhurandhar' are now tools of "Soft Power," exposing the Karachi underworld's secrets to a global audience.
-                <h4>STRATEGIC DEPTH</h4>
-                India's 2026 policy: "Strategic Retaliation." No longer waiting for attacks, but dismantling the terror infrastructure before it moves.
+        <div class="square-box" style="border-bottom: 5px solid var(--green);" onclick="this.classList.toggle('active')">
+            <div class="year-indicator" style="color: var(--green); border-color: var(--green);">FILE: 2026</div>
+            <span class="box-title" style="color: var(--green);">New Era Vigilance</span>
+            <p>The modern doctrine of proactive deterrence...</p>
+            <div class="content">
+                <div class="stat-line"></div>
+                <h4>THE DOCTRINE</h4>
+                As of 2026, India operates under the 'Agni-Siddhanta' (Doctrine of Fire). Any provocation is met with a non-linear response—digital, economic, and precision-targeted kinetic strikes.
+                <h4>TECHNOLOGICAL EDGE</h4>
+                Deployment of 'Abhimanyu' AI drone swarms and hypersonic BrahMos-II variants has rendered the old infiltration routes through PoK obsolete.
+                <h4>THE DHURANDHAR ERA</h4>
+                Following the massive success of the film, national awareness regarding the Lyari nexus has peaked. The sequel, <span class="martyr-highlight">Dhurandhar II: Revenge</span>, is set to release on March 19, 2026, focusing on the dismantling of the Uzair Baloch syndicate.
             </div>
+            <div class="active-label">FILE DECRYPTED: SCROLL TO READ FULL</div>
         </div>
 
     </div>
 
-    <script>
-        console.log("PROJECT BHARAT: ARCHIVE LOADED. SYSTEM VIGILANCE ACTIVE.");
-    </script>
+    <footer>
+        <h1 style="font-family: 'Cinzel'; color: var(--gold);">VANDE MATARAM</h1>
+        <p style="margin-top: 20px; font-family: 'Share Tech Mono';">PROJECT PRALAY © 2026 | THE UNYIELDING TRUTH</p>
+    </footer>
 
 </body>
 </html>
+
