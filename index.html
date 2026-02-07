@@ -3,266 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE RESILIENCE | India vs Terror</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Oswald:wght@300;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>THE BHARAT DOSSIER | DEFENSE ARCHIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Oswald:wght@300;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --saffron: #FF9933;
             --white: #FFFFFF;
             --green: #138808;
-            --blood: #8b0000;
-            --cyber-black: #050505;
-            --glass: rgba(255, 255, 255, 0.05);
+            --dark: #050505;
+            --accent: #00f2ff;
+            --blood: #ff2e2e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
-            background-color: var(--cyber-black);
+            background: var(--dark);
             color: var(--white);
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Oswald', sans-serif;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            background-image: 
+                linear-gradient(rgba(255, 153, 51, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(19, 136, 8, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* Background Animated Particles Effect */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-            z-index: -1;
-        }
-
-        /* Typography */
-        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 4px; }
-        .glitch { position: relative; color: var(--white); font-size: 5rem; font-weight: 900; }
-
-        /* Fancy Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--saffron), var(--green)); border-radius: 10px; }
-
-        /* Sections */
-        section {
-            min-height: 100vh;
-            padding: 100px 10%;
+        /* Hero Header */
+        header {
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
+            align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--cyber-black)),
-                        url('https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            border-bottom: 3px solid var(--saffron);
         }
 
-        .hero h1 { text-shadow: 0 0 20px var(--saffron); }
-        .hero p { font-family: 'Oswald'; font-size: 1.5rem; opacity: 0.8; margin-top: 20px; }
-
-        /* The Content Cards */
-        .beast-card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 50px;
-            border-radius: 20px;
-            margin-top: 40px;
-            transition: 0.5s;
-            position: relative;
-            overflow: hidden;
+        .logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 5rem;
+            letter-spacing: 15px;
+            background: linear-gradient(var(--saffron), var(--white), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
-        .beast-card:hover {
-            border-color: var(--saffron);
-            box-shadow: 0 0 50px rgba(255, 153, 51, 0.2);
-            transform: translateY(-10px);
-        }
-
-        .beast-card h2 { color: var(--saffron); margin-bottom: 20px; }
-
-        /* Specific Highlight: 26/11 */
-        .mumbai-grid {
+        /* The Big Square Grid */
+        .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 50px;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
-        .mumbai-stat {
-            border-left: 4px solid var(--blood);
-            padding-left: 20px;
+        .war-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            height: 400px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+
+        .war-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
+        }
+
+        .war-card h2 {
+            font-family: 'Audiowide';
+            font-size: 2rem;
+            margin-bottom: 10px;
+            z-index: 2;
+            transition: 0.5s;
+        }
+
+        .war-card .year-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Share Tech Mono';
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Overlay Content (Revealed on Click) */
+        .info-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px;
+            opacity: 0;
+            transition: 0.5s;
+            pointer-events: none;
+            overflow-y: auto;
+            z-index: 5;
+            border: 2px solid var(--accent);
+        }
+
+        .war-card.active .info-overlay {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .info-overlay p {
+            font-family: 'Share Tech Mono';
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #ccc;
             margin-bottom: 20px;
         }
 
-        .mumbai-stat h4 { color: var(--blood); font-size: 1.5rem; }
-
-        /* The Villain Profile: Rehman Dakait */
-        .villain-section {
-            background: linear-gradient(90deg, #000 0%, #1a0000 100%);
-            border-left: 10px solid var(--blood);
-        }
-
-        .dakait-img {
-            float: right;
-            width: 300px;
-            height: 400px;
-            background: #222;
-            margin-left: 30px;
-            border: 2px solid var(--blood);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron';
-            color: var(--blood);
-            text-align: center;
-        }
-
-        /* Timeline Styles */
-        .war-timeline {
-            border-left: 2px dashed var(--green);
-            padding-left: 40px;
-            margin-left: 20px;
-        }
-
-        .war-event {
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .war-event::before {
-            content: "◆";
-            position: absolute;
-            left: -53px;
-            color: var(--green);
-            font-size: 2rem;
-            background: var(--cyber-black);
-        }
-
-        /* Buttons */
-        .btn-fancy {
+        .close-btn {
             display: inline-block;
-            padding: 15px 40px;
-            border: 2px solid var(--saffron);
-            color: var(--saffron);
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-weight: bold;
-            margin-top: 30px;
-            transition: 0.3s;
+            margin-top: 20px;
+            color: var(--accent);
+            text-decoration: underline;
+            font-size: 0.9rem;
         }
 
-        .btn-fancy:hover {
-            background: var(--saffron);
-            color: #000;
-            box-shadow: 0 0 30px var(--saffron);
+        /* Decorative Background Elements */
+        .bg-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.05) 0%, transparent 70%);
+            top: -250px; left: -250px;
+            z-index: -1;
         }
 
         footer {
-            padding: 50px;
             text-align: center;
-            background: #000;
-            border-top: 1px solid var(--green);
+            padding: 100px;
+            border-top: 1px solid #222;
+            font-family: 'Share Tech Mono';
+            letter-spacing: 5px;
+            color: #555;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* 26/11 Specific Style */
+        .blood-card { border-left: 10px solid var(--blood); }
+        .blood-card h2 { color: var(--blood); }
 
-        .animate { animation: fadeIn 1s ease-out forwards; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <h1 class="glitch">SHOURYA</h1>
-        <p>CHRONICLES OF DEFENSE | INDIA vs. STATE-SPONSORED TERROR</p>
-        <div style="margin-top: 50px;">
-            <a href="#history" class="btn-fancy">ENTER THE ARCHIVE</a>
-        </div>
-    </section>
+    <div class="bg-glow"></div>
 
-    <section id="history">
-        <h2>The Modern Battlefield (Post-1995)</h2>
-        <div class="beast-card">
-            <div class="war-timeline">
-                <div class="war-event">
-                    <h3>1999: The Heights of Kargil</h3>
-                    <p>In the frigid altitudes of the Himalayas, Pakistan's Northern Light Infantry infiltrated Indian territory under the guise of mujahideen. India's response, **Operation Vijay**, saw the legendary sacrifice of Captain Vikram Batra and Manoj Kumar Pandey. The recapture of Tiger Hill signaled to the world that India’s borders were inviolable.</p>
-                </div>
-                <div class="war-event">
-                    <h3>2001: Attack on Parliament</h3>
-                    <p>A direct strike on the heart of Indian democracy. This event led to **Operation Parakram**, a massive military mobilization that brought the sub-continent to the brink of a full-scale war, changing Indian defense posture forever.</p>
-                </div>
+    <header>
+        <p style="letter-spacing: 10px; color: var(--accent); margin-bottom: 20px;">CLASSIFIED INTELLIGENCE // PROJECT BHARAT</p>
+        <div class="logo">RESILIENCE</div>
+        <p style="max-width: 600px; margin-top: 30px; font-weight: 300; opacity: 0.7;">
+            An interactive archive of the conflicts, sacrifices, and underworld operations that shaped the security of the Indian Republic from 1947 to 2026.
+        </p>
+    </header>
+
+    <div class="grid-container">
+
+        <div class="war-card" onclick="toggleCard(this)">
+            <div class="year-label">1947-48</div>
+            <h2>Indo-Pak War I</h2>
+            <div class="info-overlay">
+                <h3>The First Struggle for Kashmir</h3>
+                <p>Shortly after Independence, tribal militias backed by the Pakistan Army invaded Kashmir. Maharaja Hari Singh signed the Instrument of Accession, leading Indian troops to airlift into Srinagar.</p>
+                <p>Key Moment: The Battle of Badgam and the bravery of Major Somnath Sharma (India's first PVC). The war established the Line of Control (LoC) that exists today.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
             </div>
         </div>
-    </section>
 
-    <section id="2611" style="background-color: #0d0d0d;">
-        <h2 style="color: var(--blood);">26/11: THE NIGHT MUMBAI STOOD STILL</h2>
-        <div class="beast-card">
-            <p style="font-size: 1.2rem; margin-bottom: 20px;">On November 26, 2008, 10 terrorists launched a maritime invasion of Mumbai. This wasn't just a terror attack; it was a tactical siege designed to paralyze a global city.</p>
-            
-            <div class="mumbai-grid">
-                <div class="mumbai-stat">
-                    <h4>THE CST MASSACRE</h4>
-                    <p>Ajmal Kasab and Ismail Khan opened fire on commuters, killing 58 people in minutes. The bravery of Constable Tukaram Omble led to Kasab's capture.</p>
-                </div>
-                <div class="mumbai-stat">
-                    <h4>THE TAJ & OBEROI</h4>
-                    <p>A 60-hour standoff. The NSG (Black Cats) executed **Operation Black Tornado**, neutralizing the terrorists room-by-room in a burning architectural icon.</p>
-                </div>
-                <div class="mumbai-stat">
-                    <h4>THE LASHKAR LINK</h4>
-                    <p>Intercepted VOIP calls proved the handlers were sitting in control rooms in Pakistan, directing the killers in real-time. A global shift in how the world viewed state-sponsored terror.</p>
-                </div>
-                <div class="mumbai-stat">
-                    <h4>THE HEROES</h4>
-                    <p>Major Sandeep Unnikrishnan, Hemant Karkare, Vijay Salaskar, and Ashok Kamte. Names etched in gold.</p>
-                </div>
+        <div class="war-card" onclick="toggleCard(this)">
+            <div class="year-label">1965</div>
+            <h2>Operation Ablaze</h2>
+            <div class="info-overlay">
+                <h3>The Second Indo-Pak War</h3>
+                <p>Triggered by Pakistan's 'Operation Gibraltar' to infiltrate J&K. India responded by crossing the International Border toward Lahore.</p>
+                <p>Key Moment: The Battle of Asal Uttar, one of the largest tank battles in history, where Indian forces decimated Pakistani Patton tanks. The war ended with the Tashkent Declaration.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
             </div>
         </div>
-    </section>
 
-    <section id="dakait" class="villain-section">
-        <h2>THE ARCHITECT OF CHAOS: REHMAN DAKAIT</h2>
-        <div class="beast-card">
-            <div class="dakait-img">
-                IMAGE CLASSIFIED<br>[REHMAN DAKAIT]
-            </div>
-            <p><strong>Alias:</strong> Sardar Abdul Rehman Baloch</p>
-            <p><strong>Territory:</strong> Lyari, Karachi</p>
-            <p><strong>Impact:</strong> Rehman Dakait was more than a gangster; he was a bridge between the criminal underworld and geopolitical sabotage. He turned Lyari into a "No-Go Zone" where criminal syndicates could operate with immunity.</p>
-            <p style="margin-top: 20px;">While the Indian frontline dealt with soldiers and infiltrators, the "Deep State" utilized figures like Dakait and his successor **Uzair Baloch** to manage the logistics of chaos. Dakait’s death in a 2009 encounter with **SP Chaudhry Aslam** (the 'Encounter Specialist') was a major blow to the Lyari-based terror pipeline.</p>
-            <p style="margin-top: 20px; border-top: 1px solid #333; padding-top: 10px;"><em>"The King of Lyari fell, but the shadows he cast across the border lingered for a decade."</em></p>
-        </div>
-    </section>
-
-    <section id="future">
-        <h2 style="color: var(--green);">2025-2026: THE NEW DOCTRINE</h2>
-        <div class="beast-card">
-            <h3>OPERATION SINDOOR (2025)</h3>
-            <p>Following the Pahalgam incidents, India deployed the "Sudershan" AI-integrated drone swarm for the first time. The neutralization of high-value targets across the Line of Control (LoC) without a single civilian casualty set a new global standard for counter-terrorism.</p>
-            <div class="mumbai-stat" style="margin-top: 30px; border-color: var(--green);">
-                <h4>COMING MARCH 19, 2026</h4>
-                <p>The release of <strong>DHURANDHAR 2: THE REVENGE</strong>. A cinematic exploration of the hunt for the masterminds behind the modern insurgency.</p>
+        <div class="war-card" onclick="toggleCard(this)">
+            <div class="year-label">1971</div>
+            <h2>Liberation War</h2>
+            <div class="info-overlay">
+                <h3>The Birth of Bangladesh</h3>
+                <p>A 13-day war that changed the world map. Following the genocide in East Pakistan, India intervened. It ended with the largest military surrender since WWII (93,000 Pakistani soldiers).</p>
+                <p>Heroism: Field Marshal Sam Manekshaw's leadership and the Battle of Longewala (Major Kuldip Singh Chandpuri).</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
             </div>
         </div>
-    </section>
+
+        <div class="war-card" onclick="toggleCard(this)">
+            <div class="year-label">1999</div>
+            <h2>The Kargil Siege</h2>
+            <div class="info-overlay">
+                <h3>Operation Vijay</h3>
+                <p>High-altitude warfare in the peaks of Dras, Batalik, and Kargil. Infiltrators occupied Indian bunkers during winter.</p>
+                <p>Key Insight: First time India used Bofors guns in a direct fire role against mountain peaks. Victory was sealed on July 26, celebrated now as Kargil Vijay Diwas.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
+            </div>
+        </div>
+
+        <div class="war-card blood-card" onclick="toggleCard(this)">
+            <div class="year-label">2008</div>
+            <h2>Mumbai 26/11</h2>
+            <div class="info-overlay">
+                <h3>The Urban Siege</h3>
+                <p>A maritime terror attack by 10 LeT operatives. Targets included Taj Palace, Oberoi, and CST. It was a 60-hour battle for the soul of Mumbai.</p>
+                <p>Impact: Led to the creation of the NIA (National Investigation Agency) and major upgrades to coastal security and the NSG hubs across India.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
+            </div>
+        </div>
+
+        <div class="war-card" onclick="toggleCard(this)">
+            <div class="year-label">2009</div>
+            <h2>The Lyari Nexus</h2>
+            <div class="info-overlay">
+                <h3>Rehman Dakait & Underworld</h3>
+                <p>Rehman Dakait (Abdul Rehman Baloch) was the gangster-chief of Lyari, Karachi. He built a criminal empire that provided logistics for regional instability.</p>
+                <p>Legacy: His death in 2009 by SP Chaudhry Aslam started a chain reaction of gang wars. This underworld structure is the focus of the 2025 movie 'Dhurandhar'.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
+            </div>
+        </div>
+
+        <div class="war-card" style="border-color: var(--green);" onclick="toggleCard(this)">
+            <div class="year-label">2025-26</div>
+            <h2>Modern Doctrine</h2>
+            <div class="info-overlay">
+                <h3>Precision Deterrence</h3>
+                <p>The current era focuses on 'Deep Strike' capabilities and Electronic Warfare. Following the 2016 and 2019 strikes, India has moved to a 'Proactive' stance.</p>
+                <p>Future Intel: 2026 marks the deployment of AI-driven border surveillance and Hypersonic missile integration.</p>
+                <span class="close-btn">CLICK TO MINIMIZE</span>
+            </div>
+        </div>
+
+    </div>
 
     <footer>
-        <p>JAI HIND</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; color: #444;">This site is a tribute to the Indian Armed Forces and Intelligence Services. Built for the future.</p>
+        <p>PROJECT VIGILANCE // SECURING THE FUTURE BY REMEMBERING THE PAST</p>
+        <p style="margin-top: 10px;">&copy; 2026 NATIONAL ARCHIVE SIMULATION</p>
     </footer>
 
+    <script>
+        function toggleCard(card) {
+            // Close all other cards first
+            document.querySelectorAll('.war-card').forEach(c => {
+                if (c !== card) c.classList.remove('active');
+            });
+            // Toggle the clicked card
+            card.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
