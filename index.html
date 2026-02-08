@@ -10,7 +10,6 @@
             --neon-green: #39ff14;
             --deep-bg: #010206;
             --saffron: #FF9933;
-            --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,99 +22,105 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            /* ASHOKA CHAKRA WATERMARK - FIXED */
             background-image: 
                 linear-gradient(rgba(1, 2, 6, 0.94), rgba(1, 2, 6, 0.94)),
                 url('https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: 50%;
+            transition: background 0.2s;
         }
 
-        body.alert-active { animation: pulse-red 0.5s infinite; }
-        @keyframes pulse-red { 0% { background-color: #000; } 50% { background-color: #500; } 100% { background-color: #000; } }
+        /* RED ALERT PULSE */
+        body.alert-active { animation: emergency-red 0.5s infinite; }
+        @keyframes emergency-red { 0% { background-color: #000; } 50% { background-color: #800; } 100% { background-color: #000; } }
 
         header {
-            padding: 10px 20px;
+            padding: 15px;
             background: rgba(0,0,0,0.95);
             border-bottom: 2px solid var(--neon-green);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             z-index: 100;
         }
 
         .btn-group { display: flex; gap: 10px; }
         
         .action-btn {
-            padding: 8px 15px;
+            padding: 10px 15px;
             font-family: 'Orbitron';
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             cursor: pointer;
-            border: 1px solid white;
-            transition: 0.3s;
+            border: 2px solid white;
+            font-weight: bold;
         }
 
-        .red-btn { background: #900; color: white; border-color: red; }
+        .red-btn { background: #ff0000; color: white; border-color: #fff; box-shadow: 0 0 10px red; }
         .anthem-btn { background: #138808; color: white; border-color: #fff; }
 
         .search-container { width: 100%; margin-top: 10px; }
         #searchBar {
             width: 100%; background: #000; border: 1px solid var(--neon-green);
-            color: var(--neon-green); padding: 10px; font-family: 'Orbitron';
+            color: var(--neon-green); padding: 12px; font-family: 'Orbitron';
         }
 
         .viewport { display: flex; flex: 1; overflow: hidden; }
 
-        /* Sidebar Responsive Navigation */
         nav {
-            width: 220px;
+            width: 240px;
             background: rgba(0,0,0,0.9);
             border-right: 1px solid #333;
             overflow-y: auto;
         }
 
         .tab {
-            width: 100%; padding: 20px 15px; background: none; border: none;
-            color: #444; text-align: left; font-family: 'Orbitron';
-            cursor: pointer; font-size: 0.75rem; border-bottom: 1px solid #111;
+            width: 100%; padding: 25px 15px; background: none; border: none;
+            color: #555; text-align: left; font-family: 'Orbitron';
+            cursor: pointer; font-size: 0.8rem; border-bottom: 1px solid #111;
         }
 
-        .tab.active { color: var(--neon-green); background: rgba(57, 255, 20, 0.1); border-left: 4px solid var(--neon-green); }
+        .tab.active { color: var(--neon-green); background: rgba(57, 255, 20, 0.1); border-left: 5px solid var(--neon-green); }
 
-        /* Content Display */
-        main { flex: 1; padding: 30px; overflow-y: auto; position: relative; }
+        main { flex: 1; padding: 40px; overflow-y: auto; position: relative; }
         .intel-title { font-size: 2.2rem; color: var(--saffron); margin-bottom: 20px; font-family: 'Orbitron'; }
         .intel-body { font-size: 1.2rem; line-height: 1.8; color: var(--neon-green) !important; white-space: pre-wrap; text-align: justify; padding-bottom: 100px; }
 
-        /* Mobile Layout */
-        @media (max-width: 768px) {
-            .viewport { flex-direction: column; }
-            nav { width: 100%; height: 150px; border-right: none; border-bottom: 1px solid #333; }
-            .intel-title { font-size: 1.5rem; }
-            .intel-body { font-size: 1rem; }
+        #alert-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,0,0,0.3); display: none; z-index: 999;
+            pointer-events: none;
         }
 
-        #alert-box {
+        #countdown-box {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: red; color: white; padding: 30px; display: none; z-index: 1000;
-            font-family: 'Orbitron'; text-align: center; border: 4px solid white;
+            background: red; color: white; padding: 40px; border: 5px solid white;
+            text-align: center; font-family: 'Orbitron'; z-index: 1000; display: none;
+        }
+
+        @media (max-width: 768px) {
+            .viewport { flex-direction: column; }
+            nav { width: 100%; height: 160px; border-right: none; }
         }
     </style>
 </head>
-<body>
+<body id="mainBody">
 
-    <div id="alert-box">TERMINAL BREACH<br><span id="timer" style="font-size: 3rem;">10</span></div>
+    <div id="alert-overlay"></div>
+    <div id="countdown-box">
+        <h1 style="font-size: 3rem;">SYSTEM BREACH</h1>
+        <p>SELF-DESTRUCT IN:</p>
+        <h1 id="timer" style="font-size: 5rem;">10</h1>
+    </div>
 
     <header>
-        <h1 style="font-family: 'Orbitron'; font-size: 1.2rem;">BHARAT_COMMAND_CENTER</h1>
+        <h1 style="font-family: 'Orbitron'; color: white;">BHARAT_COMMAND_V9</h1>
         <div class="btn-group">
-            <button class="action-btn anthem-btn" onclick="playAnthem()">PLAY ANTHEM</button>
-            <button class="action-btn red-btn" onclick="triggerAlert()">RED ALERT</button>
+            <button class="action-btn anthem-btn" onclick="startAnthem()">PLAY ANTHEM</button>
+            <button class="action-btn red-btn" onclick="triggerRedAlert()">RED ALERT</button>
         </div>
         <div class="search-container">
-            <input type="text" id="searchBar" placeholder="SEARCH DATABASE (1971, 1965, etc)...">
+            <input type="text" id="searchBar" placeholder="SEARCH (1971, KARGIL, DAKAIT)...">
         </div>
     </header>
 
@@ -130,107 +135,121 @@
         </nav>
 
         <main id="mainScroll">
-            <h2 class="intel-title" id="titleArea">INITIALIZING...</h2>
-            <div class="intel-body" id="bodyArea"></div>
+            <h2 class="intel-title" id="titleArea">SYSTEM ONLINE</h2>
+            <div class="intel-body" id="bodyArea">WELCOME COMMANDER SAMRIDH. ACCESS THE ARCHIVES TO VIEW BHARAT'S POWER.</div>
         </main>
     </div>
 
     <script>
         const database = {
             'war47': {
-                title: "1947: THE BATTLE FOR THE SOUL OF KASHMIR",
-                text: "BACKGROUND OF POWER:\nAfter the British left in 1947, Pakistan attempted a proxy invasion titled 'Operation Gulmarg'. They sent thousands of armed tribal lashkars to capture Srinagar. This was Bharat's first test as a modern republic.\n\nTHE MISSION:\nMajor Somnath Sharma, leading the 4th Kumaon Regiment, was deployed to protect the Srinagar Airfield. This airfield was the only way for Indian reinforcements to arrive. If it fell, Kashmir fell. Despite being outnumbered seven-to-one and facing heavy mortar fire, Sharma stayed on the front lines. \n\nULTIMATE SACRIFICE:\nEven as his arm was in a cast, he ran across the open ground to hand out ammunition to his men. His final radio message remains the core of Indian Army courage: 'I shall not withdraw an inch but will fight to the last man and the last round.' He saved the valley and became the first recipient of the Param Vir Chakra.\n\nGLOBAL LESSON:\nBharat showed the world that a newly independent nation possessed the steel to fight back and win. We stopped a mass invasion in its tracks."
+                title: "1947: DEFENDING THE VALLEY",
+                text: "The 1947-48 war was Bharat's baptism by fire. Pakistan's 'Operation Gulmarg' involved 20,000 tribal raiders aiming to capture Srinagar. Major Somnath Sharma (PVC) became a legend when he saved the Srinagar airfield, the lifeline for Indian reinforcements. Outnumbered 7-to-1, his stand allowed India to land troops and secure the capital. This war proved Bharat would never let its borders be redrawn by force."
             },
             'war65': {
-                title: "1965: THE DESTRUCTION OF THE PATTON LEGEND",
-                text: "THE CHALLENGE:\nIn 1965, Pakistan launched 'Operation Gibraltar' and 'Operation Grand Slam'. They were equipped with the world's most advanced tanks at the time—the American M48 Patton. The world believed these tanks were invincible and that Bharat’s older Centurion and AMX tanks would stand no chance.\n\nTHE TRAP - BATTLE OF ASAL UTTAR:\nIn one of history's greatest tank battles, the Indian Army lured the massive Patton regiments into the sugarcane fields of Punjab. We flooded the fields, turning the soil into thick mud. The heavy Pattons got stuck. Our soldiers then used the tall sugarcane as cover, attacking the tanks from the side.\n\nTHE HERO:\nCQMH Abdul Hamid used a simple Jeep mounted with a recoilless gun to destroy three Patton tanks single-handedly before his martyrdom. \n\nGLOBAL LESSON:\nIndia destroyed or captured over 97 enemy tanks in a few days. The graveyard of these machines became known as 'Patton Nagar'. Bharat proved to the world that it isn't the machine that wins the war, but the bravery and tactical genius of the soldier behind it."
+                title: "1965: THE PATTON GRAVEYARD",
+                text: "During the 1965 war, Pakistan believed their superior American M48 Patton tanks would conquer Indian territory. At the Battle of Asal Uttar, Indian forces used the tall sugarcane fields to their advantage. CQMH Abdul Hamid destroyed three tanks with a single Jeep-mounted gun. India ended the battle with nearly 100 destroyed enemy tanks, turning the region into a graveyard known as 'Patton Nagar'."
             },
             'war71': {
                 title: "1971: THE BLITZKRIEG OF THE EAST",
-                text: "STRATEGIC DOMINANCE:\nField Marshal Sam Manekshaw led Bharat into a war on two fronts. The mission was to liberate 75 million people in East Pakistan from genocide. \n\nTHE NAVAL STRIKE:\nOn December 4, the Indian Navy launched 'Operation Trident'. Using small missile boats, we set the Karachi port on fire and destroyed the Pakistani Navy's backbone. This was the first time a South Asian navy performed such a deep-strike mission.\n\nTHE SURRENDER:\nIn a lightning-fast campaign of only 13 days, Indian forces surrounded Dhaka. General A.A.K. Niazi of Pakistan was forced to sign the Instrument of Surrender in front of General J.S. Aurora. 93,000 Pakistani soldiers surrendered—the largest such surrender since World War II.\n\nGLOBAL LESSON:\nBharat created a new nation (Bangladesh) in 14 days, something no other country had ever done. It established India as the undisputed superpower of the region."
+                text: "In just 13 days, Bharat changed the world map. Following 'Operation Trident', where the Indian Navy set Karachi Port on fire, the Army and IAF launched a combined strike. It ended with the surrender of 93,000 Pakistani soldiers—the largest surrender since WWII. Bharat liberated a new nation, Bangladesh, proving our status as the dominant power of South Asia."
             },
             'war99': {
-                title: "1999: KARGIL - WAR ABOVE THE CLOUDS",
-                text: "THE CRISIS:\nWhile Bharat was talking peace, the Pakistani Army secretly occupied the peaks of Kargil, Dras, and Batalik at 18,000 feet. They had the 'High Ground,' meaning they could fire down at our supply lines.\n\nTHE RESPONSE - OPERATION VIJAY:\nIndian soldiers had to climb vertical cliffs under freezing temperatures and direct machine-gun fire. This was the first time Bofors artillery was used in a direct-fire mode to blast bunkers off the mountain tops.\n\nLEGENDARY VALOUR:\nCaptain Vikram Batra (PVC) captured Tiger Hill and Point 4875. His signal 'Yeh Dil Maange More!' became a national war cry. Captain Manoj Pandey cleared three bunkers at Khalubar despite being hit by multiple bullets. \n\nGLOBAL LESSON:\nIndia won back every single peak without crossing the border, showing the world's greatest 'Strategic Restraint' while demonstrating that its infantry is the best in high-altitude warfare."
+                title: "1999: KARGIL HEIGHTS",
+                text: "Operation Vijay was fought at 18,000 feet. Despite the enemy holding the high peaks, Indian soldiers like Captain Vikram Batra ('Shershah') and Captain Manoj Pandey performed superhuman feats. Climbing vertical cliffs in freezing cold, Bharat regained every inch of soil, proving our mastery in high-altitude warfare."
             },
             'dakait': {
-                title: "LYARI FILES: NEUTRALIZING THE PROXY NETWORK",
-                text: "THE ENEMY WITHIN:\nRehman Dakait was the underworld kingpin of Karachi, Pakistan. But he wasn't just a criminal. He was a central figure in the logistical support of terrorism against Bharat.\n\nTHE INTEL:\nDakait's gang controlled the Karachi docks, which were used to smuggle weapons, explosives, and fake currency into Indian waters. He provided 'safe houses' for militants crossing the border. Our intelligence agencies identified him as a high-threat asset used by the Deep State.\n\nTHE END:\nHe was neutralized in 2009. The 2025 movie 'Dhurandhar' explores the secret operations used to break such underworld-terror networks. \n\nGLOBAL LESSON:\nBharat’s security is not just about the border; it is about destroying the finance and logistics of terror wherever they hide. We watch everything."
+                title: "LYARI DOSSIER: THE PROXY WAR",
+                text: "Rehman Dakait was a kingpin in Karachi used by the Deep State for terror logistics. His network was a key link for arms smuggling into Bharat. Intelligence dossiers confirm that Bharat's agencies monitor these underworld-terror links to prevent future attacks, as showcased in the 2025 movie 'Dhurandhar'."
             },
             'samridh': {
                 title: "OFFICER PROFILE: SAMRIDH KUMAR",
-                text: "NAME: Samridh Kumar\nRANK: Class 7 Developer & Future Leader of Bharat\nMISSION: Historical Preservation & Strategic Digital Defense\n\nSamridh represents the new age of Bharat. A generation that uses technology, coding, and history to strengthen the nation's narrative. This command center is designed to show anyone in the world that India is not just a peaceful country, but a nation of warriors who will defend their soil to the end.\n\nCURRENT STATUS: VIGILANT.\nMOTTO: SERVICE BEFORE SELF."
+                text: "NAME: Samridh Kumar\nRANK: Class 7 Developer\nMISSION: Patriotism through Technology\nSamridh represents the future of Bharat—combining technical skills with a deep love for our military history. This Command Center is a tribute to the warriors who protect us."
             }
         };
 
         let typing = null;
+        let sirenInterval = null;
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        function loadIntel(key) {
-            document.querySelectorAll('.tab').forEach(t => {
-                t.classList.remove('active');
-                if(t.onclick.toString().includes(`'${key}'`)) t.classList.add('active');
+        // TACTICAL SIREN FUNCTION
+        function playSiren() {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            // Oscillating frequency for that "WEE-WOO" effect
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
+            g.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+            osc.connect(g); g.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+        }
+
+        function triggerRedAlert() {
+            const body = document.getElementById('mainBody');
+            const box = document.getElementById('countdown-box');
+            const overlay = document.getElementById('alert-overlay');
+            
+            if(body.classList.contains('alert-active')) {
+                // STOP ALERT
+                body.classList.remove('alert-active');
+                box.style.display = 'none';
+                overlay.style.display = 'none';
+                clearInterval(sirenInterval);
+            } else {
+                // START ALERT
+                body.classList.add('alert-active');
+                box.style.display = 'block';
+                overlay.style.display = 'block';
+                
+                let time = 10;
+                document.getElementById('timer').innerText = time;
+                
+                sirenInterval = setInterval(() => {
+                    playSiren();
+                    time--;
+                    document.getElementById('timer').innerText = time;
+                    if(time <= 0) {
+                        clearInterval(sirenInterval);
+                        location.reload(); // Purge system
+                    }
+                }, 1000);
+            }
+        }
+
+        function startAnthem() {
+            const melody = [440, 493, 523, 587, 587, 587, 587, 587, 523, 493, 440];
+            let t = audioCtx.currentTime;
+            melody.forEach(f => {
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                osc.frequency.value = f;
+                g.gain.value = 0.05;
+                osc.connect(g); g.connect(audioCtx.destination);
+                osc.start(t); osc.stop(t + 0.4);
+                t += 0.5;
             });
+        }
+
+        function loadIntel(key) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            if(event) event.target.classList.add('active');
 
             const data = database[key];
-            if(!data) return;
-
             document.getElementById('titleArea').innerText = data.title;
             const body = document.getElementById('bodyArea');
             
             if(typing) clearInterval(typing);
             body.innerText = "";
             let i = 0;
-            
             typing = setInterval(() => {
                 if(i < data.text.length) {
-                    body.innerText += data.text.charAt(i);
-                    i++;
+                    body.innerText += data.text.charAt(i); i++;
                     document.getElementById('mainScroll').scrollTop = document.getElementById('mainScroll').scrollHeight;
                 } else { clearInterval(typing); }
             }, 10);
         }
-
-        function triggerAlert() {
-            document.body.classList.toggle('alert-active');
-            const box = document.getElementById('alert-box');
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            if(box.style.display === 'block') {
-                let time = 10;
-                const timer = setInterval(() => {
-                    time--;
-                    document.getElementById('timer').innerText = time;
-                    if(time <= 0) location.reload();
-                }, 1000);
-            }
-        }
-
-        function playAnthem() {
-            // High-tech synthesized Anthem melody (first 4 bars)
-            const notes = [440, 493, 523, 587, 523, 493, 440];
-            let time = audioCtx.currentTime;
-            notes.forEach(f => {
-                const osc = audioCtx.createOscillator();
-                const g = audioCtx.createGain();
-                osc.frequency.value = f;
-                g.gain.value = 0.05;
-                osc.connect(g); g.connect(audioCtx.destination);
-                osc.start(time); osc.stop(time + 0.4);
-                time += 0.5;
-            });
-        }
-
-        document.getElementById('searchBar').addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') {
-                const q = e.target.value;
-                if(q.includes('65')) loadIntel('war65');
-                else if(q.includes('47')) loadIntel('war47');
-                else if(q.includes('71')) loadIntel('war71');
-                else if(q.includes('99')) loadIntel('war99');
-                else if(q.includes('dakait')) loadIntel('dakait');
-                else if(q.includes('samridh')) loadIntel('samridh');
-            }
-        });
 
         window.onload = () => loadIntel('war47');
     </script>
