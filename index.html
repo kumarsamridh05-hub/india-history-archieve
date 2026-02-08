@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BHARAT_FORTRESS_V12 | COMMANDER SAMRIDH</title>
+    <title>BHARAT_COMMAND_V13 | SAMRIDH KUMAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-green: #39ff14;
             --deep-bg: #010206;
             --saffron: #FF9933;
+            --alert-red: #ff0000;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,68 +27,104 @@
             background-repeat: no-repeat; background-position: center; background-size: 50%;
         }
 
-        header {
-            padding: 20px 30px; background: rgba(0,0,0,0.98);
-            border-bottom: 2px solid var(--neon-green);
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-        }
+        /* EMERGENCY ALERT ANIMATION */
+        body.alert-active { animation: pulse-red 0.5s infinite; }
+        @keyframes pulse-red { 0% { background-color: #000; } 50% { background-color: #700; } 100% { background-color: #000; } }
 
-        .alert-btn {
-            padding: 10px 20px; font-family: 'Orbitron'; font-size: 0.8rem;
-            cursor: pointer; border: 2px solid white; font-weight: bold;
-            background: #ff0000; color: white; box-shadow: 0 0 15px red;
+        header {
+            padding: 15px 30px; background: rgba(0,0,0,0.98);
+            border-bottom: 2px solid var(--neon-green);
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
         }
 
         .viewport { display: flex; flex: 1; overflow: hidden; }
 
+        /* SIDEBAR AREA */
         nav {
             width: 320px; background: rgba(0,0,0,0.95);
-            border-right: 1px solid #333; overflow-y: auto;
+            border-right: 1px solid #333; display: flex; flex-direction: column;
         }
+
+        .search-container { padding: 15px; border-bottom: 1px solid #222; }
+        #intelSearch {
+            width: 100%; padding: 10px; background: #111; border: 1px solid var(--neon-green);
+            color: var(--neon-green); font-family: 'Share Tech Mono'; outline: none;
+        }
+
+        .nav-list { flex: 1; overflow-y: auto; }
 
         .tab {
-            width: 100%; padding: 25px 20px; background: none; border: none;
+            width: 100%; padding: 20px 15px; background: none; border: none;
             color: #666; text-align: left; font-family: 'Orbitron';
-            cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid #222;
+            cursor: pointer; font-size: 0.8rem; border-bottom: 1px solid #111;
         }
 
-        .tab.active { color: var(--neon-green); background: rgba(57, 255, 20, 0.1); border-left: 8px solid var(--neon-green); }
+        .tab.active { color: var(--neon-green); background: rgba(57, 255, 20, 0.1); border-left: 6px solid var(--neon-green); }
+
+        /* RELOCATED RED ALERT */
+        .red-alert-container { padding: 15px; border-top: 1px solid #222; }
+        .alert-btn {
+            width: 100%; padding: 12px; font-family: 'Orbitron'; font-size: 0.8rem;
+            cursor: pointer; border: 2px solid white; font-weight: bold;
+            background: var(--alert-red); color: white; box-shadow: 0 0 10px var(--alert-red);
+        }
 
         main { flex: 1; padding: 40px; overflow-y: auto; position: relative; scrollbar-width: thin; }
-        .intel-title { font-size: 2.5rem; color: var(--saffron); margin-bottom: 25px; font-family: 'Cinzel'; }
-        .intel-body { font-size: 1.3rem; line-height: 2.1; color: var(--neon-green) !important; white-space: pre-wrap; text-align: justify; padding-bottom: 150px; }
+        .intel-title { font-size: 2.2rem; color: var(--saffron); margin-bottom: 20px; font-family: 'Cinzel'; }
+        .intel-body { font-size: 1.2rem; line-height: 2; color: var(--neon-green) !important; white-space: pre-wrap; text-align: justify; padding-bottom: 100px; }
 
         @media (max-width: 800px) {
             .viewport { flex-direction: column; }
-            nav { width: 100%; height: auto; display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid #333; }
-            .tab { width: auto; white-space: nowrap; border-bottom: none; border-right: 1px solid #222; padding: 15px 20px; }
-            .tab.active { border-left: none; border-bottom: 4px solid var(--neon-green); }
-            .intel-title { font-size: 1.7rem; }
+            nav { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #333; }
+            .nav-list { display: flex; overflow-x: auto; }
+            .tab { width: auto; white-space: nowrap; border-bottom: none; border-right: 1px solid #222; }
+            .search-container, .red-alert-container { padding: 10px; }
+            .intel-title { font-size: 1.6rem; }
             .intel-body { font-size: 1.1rem; }
+        }
+
+        #alert-overlay {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: red; color: white; padding: 40px; border: 6px solid white;
+            text-align: center; font-family: 'Orbitron'; z-index: 2000; display: none; width: 80%;
         }
     </style>
 </head>
-<body>
+<body id="mainBody">
+
+    <div id="alert-overlay">
+        <h1 style="font-size: 2rem;">CRITICAL PURGE</h1>
+        <h1 id="timer" style="font-size: 4rem;">10</h1>
+    </div>
 
     <header>
-        <div style="font-family: 'Cinzel'; font-size: 1.6rem; color: white;">BHARAT_OFFICIAL_ARCHIVE</div>
-        <button class="alert-btn" onclick="location.reload()">RELOAD SYSTEM</button>
+        <div style="font-family: 'Cinzel'; font-size: 1.8rem; color: white; letter-spacing: 2px;">BHARAT_COMMAND_FORTRESS</div>
     </header>
 
     <div class="viewport">
         <nav id="sidebar">
-            <button class="tab active" onclick="loadIntel('war47')">01. 1947 KASHMIR OPS</button>
-            <button class="tab" onclick="loadIntel('war65')">02. 1965 TANK BATTLES</button>
-            <button class="tab" onclick="loadIntel('war71')">03. 1971 LIBERATION</button>
-            <button class="tab" onclick="loadIntel('war99')">04. 1999 KARGIL WAR</button>
-            <button class="tab" onclick="loadIntel('dakait')">05. DAKAIT INTEL FILES</button>
-            <button class="tab" onclick="loadIntel('power')">06. GLOBAL POWER STATUS</button>
-            <button class="tab" onclick="loadIntel('samridh')">07. COMMANDER PROFILE</button>
+            <div class="search-container">
+                <input type="text" id="intelSearch" placeholder="SEARCH INTEL..." onkeyup="filterIntel()">
+            </div>
+            
+            <div class="nav-list" id="navList">
+                <button class="tab active" onclick="loadIntel('war47')">01. 1947 KASHMIR OPS</button>
+                <button class="tab" onclick="loadIntel('war65')">02. 1965 TANK BATTLES</button>
+                <button class="tab" onclick="loadIntel('war71')">03. 1971 LIBERATION</button>
+                <button class="tab" onclick="loadIntel('war99')">04. 1999 KARGIL WAR</button>
+                <button class="tab" onclick="loadIntel('dakait')">05. DAKAIT INTEL FILES</button>
+                <button class="tab" onclick="loadIntel('power')">06. GLOBAL POWER STATUS</button>
+                <button class="tab" onclick="loadIntel('samridh')">07. COMMANDER PROFILE</button>
+            </div>
+
+            <div class="red-alert-container">
+                <button class="alert-btn" onclick="triggerAlert()">RED ALERT</button>
+            </div>
         </nav>
 
         <main id="mainArea">
             <h2 class="intel-title" id="titleArea">SYSTEM_INITIALIZING...</h2>
-            <div class="intel-body" id="bodyArea">ACCESSING HIGH-SECURITY SERVERS...</div>
+            <div class="intel-body" id="bodyArea"></div>
         </main>
     </div>
 
@@ -95,31 +132,31 @@
         const database = {
             'war47': {
                 title: "1947-48: THE INDO-PAK KASHMIR CONFLICT",
-                text: `DOSSIER ID: 1947-KASHMIR-ALPHA\n\n[STRATEGIC OVERVIEW]\nFollowing the partition of Bharat, the princely state of Jammu and Kashmir became a target for Pakistani aggression. Under the guise of a 'tribal rebellion,' the Pakistani military launched 'Operation Gulmarg.' Over 20,000 armed invaders infiltrated the valley, aiming to capture Srinagar and force the Maharaja's hand. This conflict marked the first time the Indian Army fought in high-altitude terrain post-independence.\n\n[THE HEROES OF BADGAM]\nOn October 27, 1947, Bharat airlifted the 1st Sikh Regiment into Srinagar just hours before the invaders reached the airport. Major Somnath Sharma, leading the 4th Kumaon, was tasked with defending the Badgam sector. Outnumbered seven-to-one, Major Sharma directed fire even while his arm was in a cast. His final message to Brigade HQ: 'The enemy is only 50 yards from us. I shall not withdraw an inch but will fight to the last man and the last round.' He saved the Srinagar airfield, the only link to the rest of India, and became the first recipient of the Param Vir Chakra.\n\n[TACTICAL SUPERIORITY]\nIndian engineers and soldiers performed the impossible by moving Stuart light tanks through the freezing, narrow Zoji La Pass at 11,575 feet. This move caught the enemy completely off-guard, leading to the liberation of Dras and Kargil. The war proved that Bharat's defense was not just about weapons, but about unyielding willpower and engineering genius. The ceasefire left Bharat with the most strategic parts of the valley, ensuring the security of the northern crown.\n\n[GEOPOLITICAL IMPACT]\nThe defense of 1947 established India's legal and moral claim over Jammu and Kashmir. It demonstrated that Bharat, despite being a young nation, possessed the military capability to defend its sovereign borders against foreign-backed asymmetric warfare. This war set the stage for the specialized mountain warfare training that makes the Indian Army the best in the world today.`
+                text: "DOSSIER ID: 1947-KASHMIR-ALPHA\n\n[STRATEGIC OVERVIEW]\nFollowing the partition of Bharat, the princely state of Jammu and Kashmir became a target for Pakistani aggression. Under the guise of a 'tribal rebellion,' the Pakistani military launched 'Operation Gulmarg.' Over 20,000 armed invaders infiltrated the valley, aiming to capture Srinagar and force the Maharaja's hand. This conflict marked the first time the Indian Army fought in high-altitude terrain post-independence.\n\n[THE HEROES OF BADGAM]\nOn October 27, 1947, Bharat airlifted the 1st Sikh Regiment into Srinagar just hours before the invaders reached the airport. Major Somnath Sharma, leading the 4th Kumaon, was tasked with defending the Badgam sector. Outnumbered seven-to-one, Major Sharma directed fire even while his arm was in a cast. His final message to Brigade HQ: 'The enemy is only 50 yards from us. I shall not withdraw an inch but will fight to the last man and the last round.' He saved the Srinagar airfield, the only link to the rest of India, and became the first recipient of the Param Vir Chakra.\n\n[TACTICAL SUPERIORITY]\nIndian engineers and soldiers performed the impossible by moving Stuart light tanks through the freezing, narrow Zoji La Pass at 11,575 feet. This move caught the enemy completely off-guard, leading to the liberation of Dras and Kargil. The war proved that Bharat's defense was not just about weapons, but about unyielding willpower and engineering genius. The ceasefire left Bharat with the most strategic parts of the valley, ensuring the security of the northern crown."
             },
             'war65': {
                 title: "1965: THE ASHES OF THE PATTON TANKS",
-                text: `DOSSIER ID: 1965-BRAVO-TANK-WAR\n\n[THE CHALLENGE]\nIn 1965, Pakistan launched 'Operation Gibraltar' to incite a rebellion in Kashmir. When this failed, they launched 'Operation Grand Slam' to seize the Akhnoor bridge. Pakistan was equipped with top-tier American M48 Patton tanks, which were believed to be invincible against Bharat’s older Centurion and AMX-13 tanks. The conflict escalated into a full-scale war across the Punjab border.\n\n[ASAL UTTAR: THE FITTING REPLY]\nAt Khem Karan, Indian commanders executed a brilliant masterstroke. They flooded the sugarcane fields at night, turning the plains into a sticky, deep swamp. When the Pakistani 1st Armoured Division advanced, their heavy Pattons got bogged down in the mud. Indian infantry and tanks, hidden in the tall sugarcane, launched a devastating ambush. Company Quartermaster Havildar Abdul Hamid destroyed multiple Patton tanks single-handedly with a recoilless gun before his sacrifice. His bravery showcased the lethality of the Indian infantryman.\n\n[THE GRAVEYARD]\nNearly 100 Pakistani tanks were destroyed or captured. The site became known as 'Patton Nagar'—a graveyard for the enemy's pride. Bharat proved that no amount of foreign military aid can defeat a soldier who fights for his motherland with superior tactical brains. The victory forced a stalemate that essentially broke the Pakistani armored division's offensive capacity for years to come.\n\n[STRATEGIC DEPTH]\nThis war highlighted the importance of 'Gnat' aircraft, which earned the name 'Sabre Slayers' for taking down the much-vaunted Pakistani F-86 Sabres. The 1965 conflict solidified India’s status as a dominant land power and proved that the post-1962 reforms had created a much more lethal and coordinated fighting force.`
+                text: "DOSSIER ID: 1965-BRAVO-TANK-WAR\n\n[THE CHALLENGE]\nIn 1965, Pakistan launched 'Operation Gibraltar' to incite a rebellion in Kashmir. When this failed, they launched 'Operation Grand Slam' to seize the Akhnoor bridge. Pakistan was equipped with top-tier American M48 Patton tanks, which were believed to be invincible against Bharat’s older Centurion and AMX-13 tanks. The conflict escalated into a full-scale war across the Punjab border.\n\n[ASAL UTTAR: THE FITTING REPLY]\nAt Khem Karan, Indian commanders executed a brilliant masterstroke. They flooded the sugarcane fields at night, turning the plains into a sticky, deep swamp. When the Pakistani 1st Armoured Division advanced, their heavy Pattons got bogged down in the mud. Indian infantry and tanks, hidden in the tall sugarcane, launched a devastating ambush. Company Quartermaster Havildar Abdul Hamid destroyed multiple Patton tanks single-handedly with a recoilless gun before his sacrifice. His bravery showcased the lethality of the Indian infantryman."
             },
             'war71': {
                 title: "1971: THE BLITZKRIEG THAT CHANGED THE WORLD",
-                text: `DOSSIER ID: 1971-CHARLIE-VICTORY\n\n[STRATEGIC ANALYSIS]\nUnder the leadership of Field Marshal Sam 'Bahadur' Manekshaw, Bharat fought a multi-front war to liberate East Pakistan. This conflict showcased Bharat’s dominance in land, air, and sea operations. It was a war of liberation, fought to stop the genocide of the Bengali people by the Pakistani military.\n\n[OPERATION TRIDENT]\nOn December 4, the Indian Navy performed a daring raid on Karachi Harbor. Using missile boats, Bharat sank the PNS Khaibar and PNS Shah Jahan, setting the Karachi oil reserves on fire. This strike crippled the Pakistani Navy and ensured Bharat’s total control over the Arabian Sea. It remains one of the most successful naval operations in history.\n\n[THE FALL OF DHAKA]\nIn the East, Indian paratroopers performed the legendary Tangail Drop, cutting off enemy retreat. The Indian Air Force achieved total air supremacy within 48 hours, allowing the army to bypass major cities and head straight for Dhaka. On December 16, 1971, General A.A.K. Niazi of Pakistan signed the Instrument of Surrender in front of General Jagjit Singh Aurora. 93,000 Pakistani soldiers surrendered—the largest military surrender since World War II. Bharat created the new nation of Bangladesh in just 13 days, a feat unmatched in modern military history.\n\n[GLOBAL RECOGNITION]\nDespite the presence of the US 7th Fleet in the Bay of Bengal, India remained firm. The victory destroyed the 'Two-Nation Theory' and established India as the undisputed hegemon of South Asia. The brilliance of General Manekshaw and the political resolve of PM Indira Gandhi remains a benchmark in strategic history.`
+                text: "DOSSIER ID: 1971-CHARLIE-VICTORY\n\n[STRATEGIC ANALYSIS]\nUnder the leadership of Field Marshal Sam 'Bahadur' Manekshaw, Bharat fought a multi-front war to liberate East Pakistan. This conflict showcased Bharat’s dominance in land, air, and sea operations. It was a war of liberation, fought to stop the genocide of the Bengali people by the Pakistani military.\n\n[OPERATION TRIDENT]\nOn December 4, the Indian Navy performed a daring raid on Karachi Harbor. Using missile boats, Bharat sank the PNS Khaibar and PNS Shah Jahan, setting the Karachi oil reserves on fire. This strike crippled the Pakistani Navy and ensured Bharat’s total control over the Arabian Sea. It remains one of the most successful naval operations in history.\n\n[THE FALL OF DHAKA]\nIn the East, Indian paratroopers performed the legendary Tangail Drop, cutting off enemy retreat. The Indian Air Force achieved total air supremacy within 48 hours, allowing the army to bypass major cities and head straight for Dhaka. On December 16, 1971, General A.A.K. Niazi of Pakistan signed the Instrument of Surrender in front of General Jagjit Singh Aurora. 93,000 Pakistani soldiers surrendered—the largest military surrender since World War II. Bharat created the new nation of Bangladesh in just 13 days."
             },
             'war99': {
                 title: "1999: KARGIL - WAR AT THE TOP OF THE WORLD",
-                text: `DOSSIER ID: 1999-DELTA-VIJAY\n\n[THE BETRAYAL]\nPakistani regulars secretly occupied fortified positions on the high peaks of Kargil, Batalik, and Dras at 18,000 feet. They held the high ground, giving them direct fire control over the National Highway 1A, the lifeline of Ladakh. The infiltration occurred under the cover of winter, breaking the spirit of the Lahore Declaration.\n\n[OPERATION VIJAY]\nIndian soldiers had to climb vertical rock faces under direct machine-gun fire. Despite the sub-zero temperatures and thin air, Bharat’s infantry performed superhuman feats. The Bofors field guns were used in 'direct fire mode' for the first time, blasting enemy bunkers off the cliffs. The IAF’s 'Operation Safed Sagar' saw Mirage 2000s dropping laser-guided bombs with pinpoint accuracy on Tiger Hill and Tololing Peak.\n\n[THE LIONS OF KARGIL]\nCaptain Vikram Batra (Sher Shah) became a household name for his bravery at Point 5140 and Point 4875. His victory cry 'Yeh Dil Maange More!' echoed across the nation. Captain Manoj Pandey cleared four bunkers at Khalubar before his martyrdom. Bharat reclaimed every single peak, proving once again that the Indian Infantry is the most lethal mountain fighting force in existence.\n\n[STRATEGIC RESTRAINT]\nIndia won the war without crossing the International Border, gaining massive diplomatic support worldwide. The conflict led to a total overhaul of India's intelligence and defense procurement through the Kargil Review Committee, making the nation more secure than ever before.`
+                text: "DOSSIER ID: 1999-DELTA-VIJAY\n\n[THE BETRAYAL]\nPakistani regulars secretly occupied fortified positions on the high peaks of Kargil, Batalik, and Dras at 18,000 feet. They held the high ground, giving them direct fire control over the National Highway 1A, the lifeline of Ladakh. The infiltration occurred under the cover of winter, breaking the spirit of the Lahore Declaration.\n\n[OPERATION VIJAY]\nIndian soldiers had to climb vertical rock faces under direct machine-gun fire. Despite the sub-zero temperatures and thin air, Bharat’s infantry performed superhuman feats. The Bofors field guns were used in 'direct fire mode' for the first time, blasting enemy bunkers off the cliffs. The IAF’s 'Operation Safed Sagar' saw Mirage 2000s dropping laser-guided bombs with pinpoint accuracy on Tiger Hill and Tololing Peak.\n\n[THE LIONS OF KARGIL]\nCaptain Vikram Batra (Sher Shah) became a household name for his bravery at Point 5140 and Point 4875. His victory cry 'Yeh Dil Maange More!' echoed across the nation. Captain Manoj Pandey cleared four bunkers at Khalubar before his martyrdom."
             },
             'dakait': {
                 title: "INTEL: THE SHADOW WAR & PROXY NETWORKS",
-                text: `DOSSIER ID: SHADOW-EPSILON-DAKAIT\n\n[THE PROXY NEXUS]\nRehman Dakait was more than a gang leader in Karachi’s Lyari; he was a strategic asset for anti-Bharat operations. His network provided the logistics for arms trafficking and served as a safe haven for terror modules before they were infiltrated into Indian territory. This dossier analyzes the asymmetric warfare Bharat faces daily.\n\n[OPERATIONAL ANALYSIS]\nIntelligence reports highlight how these underworld networks are utilized by state actors to fund and execute 'death by a thousand cuts' strategies. Bharat’s response, involving deep-cover intelligence and surgical strikes, has disrupted these pathways. The movie 'Dhurandhar' (2025) depicts the sophisticated technology and brave officers who work in the shadows to neutralize these networks before they reach our borders.\n\n[MODERN DEFENSE]\nToday, Bharat uses AI-driven surveillance and multi-agency coordination (MAC) to track the flow of Hawala money and weapons. The dismantling of the Lyari-style networks is a testament to the proactive stance of Indian intelligence. We no longer wait for a threat to arrive; we eliminate it at the source.\n\n[ONGOING MONITORING]\nThe Command Center remains vigilant against the resurgence of such networks. Counter-terrorism units are currently using satellite data and signal intelligence to map underground bunkers and communication lines across the border.`
+                text: "DOSSIER ID: SHADOW-EPSILON-DAKAIT\n\n[THE PROXY NEXUS]\nRehman Dakait was more than a gang leader in Karachi’s Lyari; he was a strategic asset for anti-Bharat operations. His network provided the logistics for arms trafficking and served as a safe haven for terror modules before they were infiltrated into Indian territory.\n\n[OPERATIONAL ANALYSIS]\nIntelligence reports highlight how these underworld networks are utilized by state actors to fund and execute 'death by a thousand cuts' strategies. Bharat’s response, involving deep-cover intelligence and surgical strikes, has disrupted these pathways. The movie 'Dhurandhar' (2025) depicts the sophisticated technology and brave officers who work in the shadows to neutralize these networks before they reach our borders."
             },
             'power': {
                 title: "BHARAT: GLOBAL SUPERPOWER STATUS 2026",
-                text: `DOSSIER ID: POWER-REPORT-2026\n\n[MILITARY CAPABILITIES]\nBharat is currently the 4th most powerful military on Earth. We operate a nuclear triad, meaning we can launch nuclear defenses from land (Agni-V missiles), air (Rafale/Su-30 MKI), and sea (INS Arihant class submarines). Our aircraft carriers, INS Vikramaditya and INS Vikrant, ensure that the Indian Ocean remains Bharat's domain.\n\n[SPACE & TECH DOMINANCE]\nWith Chandrayaan-3 reaching the Lunar South Pole and the upcoming Gaganyaan mission, Bharat is a global leader in space exploration. ISRO is now the most cost-effective and successful space agency on the planet. Our NavIC satellite system provides total independent navigation for our defense forces.\n\n[ECONOMIC & SOFT POWER]\nBharat is the world's 5th largest economy, soon to be 3rd. We are the pharmacy of the world and the IT backbone of the global economy. Our cultural influence through yoga, cinema, and history makes Bharat a 'Vishwaguru' (Global Teacher). Bharat’s presence in the Quad and G20 has shifted the global power balance toward the East.\n\n[INTERNAL SECURITY]\nMassive infrastructure projects in the Northeast and border states have integrated the nation like never before. The modernization of the police and paramilitary forces under the 'Self-Reliant India' initiative ensures that internal threats are neutralized with extreme efficiency.`
+                text: "DOSSIER ID: POWER-REPORT-2026\n\n[MILITARY CAPABILITIES]\nBharat is currently the 4th most powerful military on Earth. We operate a nuclear triad, meaning we can launch nuclear defenses from land (Agni-V missiles), air (Rafale/Su-30 MKI), and sea (INS Arihant class submarines). Our aircraft carriers, INS Vikramaditya and INS Vikrant, ensure that the Indian Ocean remains Bharat's domain.\n\n[SPACE & TECH DOMINANCE]\nWith Chandrayaan-3 reaching the Lunar South Pole and the upcoming Gaganyaan mission, Bharat is a global leader in space exploration. ISRO is now the most cost-effective and successful space agency on the planet. Our NavIC satellite system provides total independent navigation for our defense forces."
             },
             'samridh': {
                 title: "COMMANDER PROFILE: SAMRIDH KUMAR",
-                text: `NAME: Samridh Kumar\nRANK: Class 7 Developer & Strategic Archivist\nSTATION: Bharat Digital Command\n\n[MISSION LOG]\nCommander Samridh has developed this Command Center to ensure that the history of Bharat's victories is preserved with extreme detail. He believes that knowledge is the ultimate weapon in the digital age. This portal serves as a reminder of the heroes who stood tall so we can code in peace.\n\n[SYSTEM STATUS]\nALL ARCHIVES DECRYPTED. VIGILANCE REMAINS AT 100%. \nMOTTO: SERVICE BEFORE SELF. TRUTH TRIUMPHS.\n\n[FUTURE PROTOCOLS]\nThe Commander is currently analyzing new ways to integrate real-time satellite feeds and predictive analytics into this fortress. The goal is total informational awareness. No change is too small; no detail is too long. Bharat First.`
+                text: "NAME: Samridh Kumar\nRANK: Class 7 Developer & Strategic Archivist\nSTATION: Bharat Digital Command\n\n[MISSION LOG]\nCommander Samridh has developed this Command Center to ensure that the history of Bharat's victories is preserved with extreme detail. He believes that knowledge is the ultimate weapon in the digital age. This portal serves as a reminder of the heroes who stood tall so we can code in peace.\n\n[SYSTEM STATUS]\nALL ARCHIVES DECRYPTED. VIGILANCE REMAINS AT 100%. \nMOTTO: SERVICE BEFORE SELF. TRUTH TRIUMPHS."
             }
         };
 
@@ -127,26 +164,42 @@
 
         function loadIntel(key) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            if(event) event.target.classList.add('active');
+            if(event && event.target.classList.contains('tab')) event.target.classList.add('active');
 
             const data = database[key];
             document.getElementById('titleArea').innerText = data.title;
-            const body = document.getElementById('mainArea');
             const bodyText = document.getElementById('bodyArea');
             
             if(typing) clearInterval(typing);
             bodyText.innerText = "";
             let i = 0;
             
-            // Fast typing speed for massive text
             typing = setInterval(() => {
                 if(i < data.text.length) {
                     bodyText.innerText += data.text.charAt(i);
                     i++;
-                } else {
-                    clearInterval(typing);
-                }
-            }, 2); 
+                } else { clearInterval(typing); }
+            }, 3); 
+        }
+
+        function filterIntel() {
+            let input = document.getElementById('intelSearch').value.toUpperCase();
+            let tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                let txt = tab.innerText.toUpperCase();
+                tab.style.display = txt.includes(input) ? "" : "none";
+            });
+        }
+
+        function triggerAlert() {
+            document.getElementById('mainBody').classList.add('alert-active');
+            document.getElementById('alert-overlay').style.display = 'block';
+            let count = 10;
+            const timer = setInterval(() => {
+                count--;
+                document.getElementById('timer').innerText = count;
+                if(count <= 0) { location.reload(); }
+            }, 1000);
         }
 
         window.onload = () => loadIntel('war47');
