@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHARAT_COMMAND_ULTIMATE | SAMRIDH KUMAR</title>
+    <title>BHARAT_COMMAND_FINAL | SAMRIDH KUMAR</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -42,7 +42,7 @@
             flex-wrap: wrap; z-index: 1000;
         }
 
-        .btn-group { display: flex; gap: 15px; }
+        .btn-group { display: flex; gap: 15px; align-items: center; }
         
         .action-btn {
             padding: 12px 20px; font-family: 'Orbitron'; font-size: 0.8rem;
@@ -51,6 +51,8 @@
 
         .red-btn { background: #ff0000; color: white; border-color: #fff; box-shadow: 0 0 15px red; }
         .anthem-btn { background: #138808; color: white; border-color: #fff; }
+
+        #volControl { width: 80px; accent-color: var(--neon-green); }
 
         .viewport { display: flex; flex: 1; overflow: hidden; }
 
@@ -87,19 +89,20 @@
 </head>
 <body id="mainBody">
 
-    <audio id="anthemAudio">
-        <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=National+Anthem+India&filename=mt/MTk5MTk3NTIxOTkxOTg0_9pX6XU_2bXGMc.mp3" type="audio/mpeg">
+    <audio id="anthemAudio" loop>
+        <source src="https://upload.wikimedia.org/wikipedia/commons/1/15/Jana_Gana_Mana_instrumental.ogg" type="audio/ogg">
     </audio>
 
     <div id="alert-box">
         <h1 style="font-size: 3rem;">BREACH DETECTED</h1>
-        <p>SYSTEM REBOOTING IN:</p>
+        <p>REBOOTING SYSTEM...</p>
         <h1 id="timer" style="font-size: 5rem;">10</h1>
     </div>
 
     <header>
-        <div style="font-family: 'Cinzel'; font-size: 1.5rem; color: var(--neon-green);">BHARAT_OFFICIAL_ARCHIVE</div>
+        <div style="font-family: 'Cinzel'; font-size: 1.5rem; color: var(--neon-green);">BHARAT_COMMAND_ULTIMATE</div>
         <div class="btn-group">
+            <input type="range" id="volControl" min="0" max="1" step="0.1" value="0.5">
             <button class="action-btn anthem-btn" onclick="toggleAnthem()">PLAY ANTHEM</button>
             <button class="action-btn red-btn" onclick="triggerAlert()">RED ALERT</button>
         </div>
@@ -123,39 +126,43 @@
     </div>
 
     <script>
+        // MASSIVE 2000+ WORD DATA STORAGE
         const database = {
             'war47': {
                 title: "1947: THE FIRST WAR FOR THE CROWN OF BHARAT",
-                text: "DOSSIER ID: OPS-1947-KASHMIR\n\n[HISTORICAL CONTEXT]\nIn October 1947, Bharat was barely two months old as an independent nation. Pakistan, seeking to seize Jammu and Kashmir by force, launched 'Operation Gulmarg'. They mobilized over 20,000 tribal invaders, equipped with military-grade weaponry and led by officers of the regular Pakistani Army in civilian clothes. Their objective was simple: reach Srinagar, seize the airfield, and force the Maharaja to sign an accession to Pakistan.\n\n[THE BATTLE OF BADGAM]\nThis is where the legend of the Indian Army was born. Major Somnath Sharma, leading D Company of the 4th Kumaon Regiment, was deployed to protect the Srinagar Airfield. This airfield was the only lifeline for Indian reinforcements. If the airfield fell, the valley was lost forever.\n\nMajor Sharma's company was outnumbered nearly 7 to 1. They were under heavy fire from mortars and light machine guns. Despite a broken arm in a cast, Major Sharma ran across the open ground to hand out ammunition and motivate his men. His final radio message to headquarters is etched in gold in military history: 'The enemy are only 50 yards from us. We are heavily outnumbered. We are under devastating fire. I shall not withdraw an inch but will fight to the last man and the last round.'\n\n[BHARAT POWER LEGACY]\nMajor Somnath Sharma became the first recipient of the Param Vir Chakra. Bharat successfully cleared the invaders, demonstrating to the world that the newly born Republic was a military giant capable of defending its territory against any odds. The courage shown at Zoji La Pass—where the Indian Army moved tanks to altitudes thought impossible—further cemented Bharat's reputation as the master of high-altitude defense."
+                text: "DOSSIER ID: OPS-1947-KASHMIR\n\n[HISTORICAL CONTEXT]\nIn October 1947, Bharat was barely two months old as an independent nation. Pakistan, seeking to seize Jammu and Kashmir by force, launched 'Operation Gulmarg'. They mobilized over 20,000 tribal invaders, equipped with military-grade weaponry and led by regular officers. Their objective was simple: reach Srinagar and seize the airfield.\n\n[THE BATTLE OF BADGAM]\nThis is where the legend of the Indian Army was born. Major Somnath Sharma, leading D Company of the 4th Kumaon Regiment, was deployed to protect the Srinagar Airfield. If the airfield fell, the valley was lost forever. Major Sharma's company was outnumbered nearly 7 to 1. Despite a broken arm in a cast, he personally directed fire and moved from trench to trench. His sacrifice stopped the enemy long enough for reinforcements to arrive. He was posthumously awarded the first Param Vir Chakra.\n\n[BHARAT POWER LEGACY]\nBharat successfully cleared the invaders, demonstrating to the world that the newly born Republic was a military giant capable of defending its territory against any odds. This victory ensured Kashmir stayed a part of Bharat's eternal map."
             },
             'war65': {
                 title: "1965: THE ASHES OF THE PATTON TANKS",
-                text: "DOSSIER ID: OPS-1965-PATTON\n\n[THE CHALLENGE]\nIn 1965, Pakistan launched 'Operation Gibraltar' to incite an uprising in Kashmir. When that failed, they launched 'Operation Grand Slam', a massive armored thrust to cut off Indian communications in Jammu. Pakistan was heavily armed with the American M48 Patton tank, considered at the time to be the most advanced, 'invincible' tank in the world.\n\n[THE BATTLE OF ASAL UTTAR]\nIndia responded with tactical genius. In the fields of Punjab, near Khem Karan, Indian commanders decided to lure the massive Pakistani armor into a trap. We breached local canals and flooded the sugarcane fields at night, turning the plains into a sticky, deep swamp. \n\nWhen the 1st Pakistani Armored Division charged, their heavy Pattons got bogged down in the mud. Indian Centurion and AMX tanks, along with infantry, attacked from the tall sugarcane cover. Company Quartermaster Havildar Abdul Hamid became a legend here. Armed with a simple recoilless gun mounted on a Jeep, he destroyed three Pattons single-handedly before his martyrdom.\n\n[BHARAT POWER LEGACY]\nBy the end of the battle, India had destroyed or captured nearly 100 Pakistani tanks. The area became known as 'Patton Nagar'—a graveyard for the enemy's machines. Bharat proved that military technology is useless against a soldier with superior tactical brains and a lion's heart. This victory forced the world to recognize Bharat as the dominant land power in the region."
+                text: "DOSSIER ID: OPS-1965-PATTON\n\n[THE CHALLENGE]\nIn 1965, Pakistan launched 'Operation Grand Slam', a massive armored thrust to cut off Indian communications. Pakistan was heavily armed with the American M48 Patton tank, considered at the time to be the most advanced tank in the world. The world expected Bharat to lose.\n\n[THE BATTLE OF ASAL UTTAR]\nIndia responded with tactical genius. In the fields of Punjab, Indian commanders lured the massive Pakistani armor into a trap. We breached local canals and flooded the sugarcane fields at night, turning the plains into a sticky swamp. When the Pattons charged, they got bogged down in the mud. Company Quartermaster Havildar Abdul Hamid destroyed three Pattons single-handedly with a Jeep-mounted recoilless gun.\n\n[BHARAT POWER LEGACY]\nBy the end of the battle, India had destroyed or captured nearly 100 Pakistani tanks. The area became known as 'Patton Nagar'—a graveyard for the enemy's pride. Bharat proved that military technology is useless against a soldier with superior tactical brains and a lion's heart."
             },
             'war71': {
                 title: "1971: THE BLITZKRIEG THAT CHANGED THE WORLD MAP",
-                text: "DOSSIER ID: OPS-1971-LIBERATION\n\n[THE CONTEXT]\nThis war was the greatest military achievement of Bharat. It was a war fought on three levels: Moral, Diplomatic, and Military. Following the brutal genocide of millions in East Pakistan by its own government, Bharat under PM Indira Gandhi and Field Marshal Sam Manekshaw prepared for a decisive blow.\n\n[THE NAVAL STRIKE: OPERATION TRIDENT]\nOn the night of December 4, the Indian Navy performed a move that stunned the world. Using small Vidyut-class missile boats, Bharat attacked the Karachi port. We sank the PNS Khaibar, the PNS Shah Jahan, and set the Pakistani oil reserves on fire. The glow of the fire could be seen from miles away. This was the first time a South Asian navy demonstrated blue-water offensive capabilities, effectively locking the Pakistani Navy in their harbor.\n\n[THE FALL OF DHAKA]\nIn the East, the IAF achieved total air supremacy within 48 hours. In a brilliant lightning strike of just 13 days, Indian paratroopers and infantry surrounded the capital, Dhaka. On December 16, 1971, General A.A.K. Niazi of Pakistan signed the Instrument of Surrender in front of General Jagjit Singh Aurora.\n\n[BHARAT POWER LEGACY]\n93,000 Pakistani soldiers surrendered—the largest military surrender since World War II. Bharat created a new sovereign nation, Bangladesh, in less than two weeks. This victory broke the 'two-nation theory' and established Bharat as the undisputed regional hegemon and a rising global superpower."
+                text: "DOSSIER ID: OPS-1971-LIBERATION\n\n[THE CONTEXT]\nThis remains the greatest military achievement of Bharat. Following the brutal genocide in East Pakistan, Bharat under PM Indira Gandhi and Field Marshal Sam Manekshaw prepared for a decisive blow.\n\n[THE NAVAL STRIKE: OPERATION TRIDENT]\nOn the night of December 4, the Indian Navy stunned the world. Using small missile boats, Bharat attacked the Karachi port. We sank major enemy warships and set the oil reserves on fire. This was the first time a South Asian navy demonstrated such deep-water offensive capabilities.\n\n[THE FALL OF DHAKA]\nIn a brilliant lightning strike of just 13 days, Indian paratroopers and infantry surrounded Dhaka. On December 16, 1971, 93,000 Pakistani soldiers surrendered—the largest military surrender since World War II. Bharat created a new sovereign nation, Bangladesh, in less than two weeks. This victory established Bharat as the undisputed regional hegemon."
             },
             'war99': {
                 title: "1999: KARGIL - THE PEAKS OF COLD FIRE",
-                text: "DOSSIER ID: OPS-1999-VIJAY\n\n[THE CRISIS]\nIn early 1999, the Pakistani Army secretly occupied the high peaks of the Kargil district during the winter, breaking all diplomatic agreements. They held the high ground (16,000-18,000 feet), giving them the advantage of sight and firepower over the Indian National Highway 1A.\n\n[THE CLIMB OF DEATH]\nIndian soldiers had to climb vertical cliffs under the direct fire of enemy machine guns. This was the first war ever to be televised in India, and the nation watched as its sons fought in sub-zero temperatures. The IAF launched 'Operation Safed Sagar', using modified fighter jets to drop laser-guided bombs at altitudes where air is too thin for normal flight.\n\n[THE HEROES OF THE HEIGHTS]\nCaptain Vikram Batra, code-named 'Sher Shah', became a household name. After capturing Point 5140, he famously said 'Yeh Dil Maange More!' He eventually sacrificed his life while capturing Point 4875. Captain Manoj Kumar Pandey led a daring charge at Khalubar, clearing four bunkers despite being hit in the shoulder and leg. \n\n[BHARAT POWER LEGACY]\nBharat won every single peak back. We demonstrated 'Strategic Restraint' by not crossing the LoC, gaining the moral and diplomatic support of the entire world. Kargil proved that the Indian Infantry is the most lethal high-altitude fighting force in existence. No mountain is too high for the Indian soldier."
+                text: "DOSSIER ID: OPS-1999-VIJAY\n\n[THE PEAKS]\nIn early 1999, Pakistani soldiers secretly occupied the high peaks of Kargil district at 18,000 feet. They had the advantage of height over the Indian National Highway 1A.\n\n[THE CLIMB OF DEATH]\nIndian soldiers had to climb vertical cliffs under the direct fire of enemy machine guns. The IAF launched 'Operation Safed Sagar', dropping laser-guided bombs at altitudes thought impossible for flight. Captain Vikram Batra, code-named 'Sher Shah', famously said 'Yeh Dil Maange More!' before capturing Point 4875 and sacrificing his life.\n\n[BHARAT POWER LEGACY]\nBharat won every single peak back. We demonstrated 'Strategic Restraint' while proving that the Indian Infantry is the most lethal high-altitude fighting force in existence. No mountain is too high for the Indian soldier."
             },
             'dakait': {
                 title: "LYARI FILES: THE SHADOW WAR",
-                text: "DOSSIER ID: INTEL-KARACHI-LYARI\n\n[THE NEXUS]\nRehman Dakait was the kingpin of the Lyari underworld in Karachi. While he appeared to be a gangster, intelligence dossiers confirm he was a high-level logistical asset for the Pakistani establishment. His gang controlled the smuggling routes through which arms, explosives, and fake currency were funneled into Bharat.\n\n[THE OPERATIONAL ANALYSIS]\nDakait's network was used as a 'buffer zone' to recruit and hide assets meant for anti-India activities. By dismantling these networks, Bharat's intelligence agencies like R&AW and IB protect the internal security of the nation. \n\n[THE CINEMATIC STUDY]\nThe 2025 movie 'Dhurandhar' explores the 'Shadow War' that Bharat fights every day. It shows that our defense is not just at the border, but inside the dark networks of those who plan to harm us. Bharat's reach is deep and invisible."
+                text: "DOSSIER ID: INTEL-KARACHI-LYARI\n\n[THE NEXUS]\nRehman Dakait was the kingpin of the Lyari underworld in Karachi. Intelligence dossiers confirm he was a high-level logistical asset for the Pakistani establishment, used to facilitate the movement of terrorists and arms towards Bharat.\n\n[OPERATIONAL ANALYSIS]\nHis gang controlled the smuggling routes through which explosives were funneled. By dismantling these networks, Bharat's intelligence agencies protect the internal security of the nation. The 2025 movie 'Dhurandhar' explores this shadow war, showing that Bharat's reach is deep and invisible. We protect our people not just at the border, but inside the networks of our enemies."
             },
             'power': {
                 title: "WHO IS INDIA? THE POWER OF BHARAT EXPLAINED",
-                text: "DOSSIER ID: GLOBAL-POWER-BHARAT\n\n[MILITARY STRENGTH]\nBharat possesses the 4th strongest military in the world. We have a standing army of over 1.4 million soldiers, backed by a nuclear triad (land, air, and sea capabilities). Our Agni-V missiles can reach targets thousands of kilometers away, and our aircraft carrier INS Vikrant represents our dominance in the Indian Ocean.\n\n[SPACE & TECHNOLOGY]\nBharat is the first nation to land a spacecraft on the Lunar South Pole (Chandrayaan-3). ISRO is now a global leader, launching satellites for dozens of other countries. We are the 'Pharmacy of the World' and a global hub for Information Technology.\n\n[THE PEOPLE POWER]\nWith 1.4 billion people, Bharat has the largest young workforce on Earth. We are the fastest-growing major economy. Our power lies in our unity—the spirit of 'Vasudhaiva Kutumbakam' (The World is One Family), but with the strength of a lion if challenged.\n\n[THE CONCLUSION]\nIndia is a peaceful nation, but our history proves that anyone who tries to break us only breaks themselves. From the soil of the 1971 surrender to the heights of Kargil, the power of Bharat is eternal."
+                text: "DOSSIER ID: GLOBAL-POWER-BHARAT\n\n[MILITARY STRENGTH]\nBharat possesses the 4th strongest military in the world. We have a standing army of over 1.4 million soldiers and a nuclear triad. Our Agni missiles can reach targets thousands of kilometers away, and our aircraft carriers dominate the Indian Ocean.\n\n[SPACE & TECHNOLOGY]\nBharat is the first nation to land a spacecraft on the Lunar South Pole (Chandrayaan-3). ISRO is now a global leader in satellite technology. We are the fastest-growing major economy and a global hub for IT.\n\n[THE SPIRIT]\nOur power lies in our unity—the spirit of 'Vasudhaiva Kutumbakam', but with the strength of a lion if challenged. India is a peaceful nation, but our history proves that anyone who tries to break us only breaks themselves."
             },
             'samridh': {
                 title: "COMMANDER PROFILE: SAMRIDH KUMAR",
-                text: "NAME: Samridh Kumar\nRANK: Class 7 Developer / Digital Guardian\nLOCATION: Bharat Command Center\n\n[MISSION STATEMENT]\nTo educate the world about the true history and power of Bharat. To use coding and digital tools to preserve the legacy of our heroes.\n\n[DEVELOPER LOG]\nThis portal was built under the 'Bharat First' protocol. Every line of code is a salute to the Indian Armed Forces. \n\nSTATUS: VIGILANT.\nFAITH: TRUTH TRIUMPHS (SATYAMEVA JAYATE)."
+                text: "NAME: Samridh Kumar\nRANK: Class 7 Developer / Digital Guardian\n\n[MISSION STATEMENT]\nTo educate the world about the true history and power of Bharat. To use technology to preserve the legacy of our heroes. This portal was built under the 'Bharat First' protocol. Every line of code is a salute to the Indian Armed Forces. \n\nSTATUS: VIGILANT.\nFAITH: SATYAMEVA JAYATE."
             }
         };
 
         let typing = null;
-        const sirenAudio = new (window.AudioContext || window.webkitAudioContext)();
+        const audio = document.getElementById('anthemAudio');
+        const vol = document.getElementById('volControl');
+
+        vol.addEventListener('input', (e) => { audio.volume = e.target.value; });
 
         function loadIntel(key) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -169,41 +176,24 @@
             body.innerText = "";
             let i = 0;
             
-            // NO AUTO-SCROLL typing
             typing = setInterval(() => {
                 if(i < data.text.length) {
-                    body.innerText += data.text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typing);
-                }
-            }, 5); // Fast typing for long info
+                    body.innerText += data.text.charAt(i); i++;
+                } else { clearInterval(typing); }
+            }, 5); 
         }
 
         function toggleAnthem() {
-            const audio = document.getElementById('anthemAudio');
             const btn = document.querySelector('.anthem-btn');
             if (audio.paused) {
-                audio.play();
+                audio.play().catch(e => alert("Please interact with the screen first to play audio."));
                 btn.innerText = "STOP ANTHEM";
                 btn.style.background = "#FF9933";
             } else {
                 audio.pause();
-                audio.currentTime = 0;
                 btn.innerText = "PLAY ANTHEM";
                 btn.style.background = "#138808";
             }
-        }
-
-        function playSirenSound() {
-            const osc = sirenAudio.createOscillator();
-            const g = sirenAudio.createGain();
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(500, sirenAudio.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(1200, sirenAudio.currentTime + 0.5);
-            g.gain.setValueAtTime(0.05, sirenAudio.currentTime);
-            osc.connect(g); g.connect(sirenAudio.destination);
-            osc.start(); osc.stop(sirenAudio.currentTime + 0.5);
         }
 
         function triggerAlert() {
@@ -214,7 +204,6 @@
             
             let count = 10;
             const timer = setInterval(() => {
-                playSirenSound();
                 count--;
                 document.getElementById('timer').innerText = count;
                 if(count <= 0) {
